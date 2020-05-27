@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -7,9 +8,10 @@ import React from 'react';
 
 const InfoPage = () => (
     <div>
-        <p>
-            Info Page
-    </p>
+        <h1>Info</h1>
+        <Link to="/events">
+            <h2>Events</h2>
+        </Link>
     </div>
 );
 
