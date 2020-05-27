@@ -12,6 +12,9 @@ const InfoPage = () => (
         <Link to="/events">
             <h2>Events</h2>
         </Link>
+        <Link to="/post">
+            <h2>Post Event</h2>
+        </Link>
     </div>
 );
 

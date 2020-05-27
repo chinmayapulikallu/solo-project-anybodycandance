@@ -18,7 +18,7 @@ class UpcomingEvents extends Component {
                <ul>
                    {this.props.events.map(event => {
                        return (
-                           <li key={event.id}>{event.event_name}</li>
+                           <li key={event.id}>{event.event_name},{event.event_location},{event.event_date}</li>
                        )
                    })}
                </ul>
