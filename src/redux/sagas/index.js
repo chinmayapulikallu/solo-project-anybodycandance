@@ -4,6 +4,9 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import eventSaga from './eventSaga';
 import postEventSaga from './postEventSaga';
+import dancerSaga from  './dancerSaga';
+import newDancerSaga from './newDancerSaga';
+
 
 
 // rootSaga is the primary saga.
@@ -19,6 +22,8 @@ export default function* rootSaga() {
         registrationSaga(),
         userSaga(),
         eventSaga(),
-        postEventSaga()
+        postEventSaga(),
+        dancerSaga(),
+        newDancerSaga()
     ]);
 }

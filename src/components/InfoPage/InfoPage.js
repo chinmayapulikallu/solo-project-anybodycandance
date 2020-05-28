@@ -15,6 +15,12 @@ const InfoPage = () => (
         <Link to="/post">
             <h2>Post Event</h2>
         </Link>
+        <Link to="/dancers">
+            <h2>Dancers</h2>
+        </Link>
+        <Link to="/newDancer">
+            <h2>New Dancer Registration</h2>
+        </Link>
     </div>
 );
 
