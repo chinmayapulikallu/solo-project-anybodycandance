@@ -14,10 +14,11 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import UpcomingEvents from '../UpcomingEvents/UpcomingEvents';
+import AllEvents from '../AllEvents/AllEvents';
 import PostEvent from '../PostEvent/PostEvent';
 import Dancers from '../Dancers/Dancers';
 import NewDancer from '../NewDancer/NewDancer';
+import NewEvent from '../NewEvent/NewEvent';
 
 import './App.css';
 
@@ -59,7 +60,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/events"
-              component={UpcomingEvents}
+              component={AllEvents}
             />
             <ProtectedRoute
               exact
@@ -75,6 +76,11 @@ class App extends Component {
               exact
               path="/newdancer"
               component={NewDancer}
+            />
+            <ProtectedRoute
+              exact
+              path="/newevent"
+              component={NewEvent}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

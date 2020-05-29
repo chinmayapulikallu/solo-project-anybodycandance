@@ -1,7 +1,11 @@
 {
     "cSpell.words": [
+        "api",
+        "key",
         "newdancer",
         "rootreducer",
-        "rootsaga"
+        "rootsaga",
+        "sendgrid",
+        "sendgrid api key"
     ]
 }

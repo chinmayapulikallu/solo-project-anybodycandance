@@ -6,6 +6,8 @@ import eventSaga from './eventSaga';
 import postEventSaga from './postEventSaga';
 import dancerSaga from  './dancerSaga';
 import newDancerSaga from './newDancerSaga';
+import deleteEventSaga from './deleteEventSaga';
+import deleteDancerSaga from './deleteDancerSaga';
 
 
 
@@ -24,6 +26,8 @@ export default function* rootSaga() {
         eventSaga(),
         postEventSaga(),
         dancerSaga(),
-        newDancerSaga()
+        newDancerSaga(),
+        deleteEventSaga(),
+        deleteDancerSaga()
     ]);
 }

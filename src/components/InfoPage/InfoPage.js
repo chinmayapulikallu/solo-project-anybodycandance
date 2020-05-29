@@ -10,7 +10,7 @@ const InfoPage = () => (
     <div>
         <h1>Info</h1>
         <Link to="/events">
-            <h2>Events</h2>
+            <h2>All Events</h2>
         </Link>
         <Link to="/post">
             <h2>Post Event</h2>
@@ -18,8 +18,11 @@ const InfoPage = () => (
         <Link to="/dancers">
             <h2>Dancers</h2>
         </Link>
-        <Link to="/newDancer">
+        <Link to="/newdancer">
             <h2>New Dancer Registration</h2>
+        </Link>
+        <Link to="/newevent">
+            <h2>New Event</h2>
         </Link>
     </div>
 );

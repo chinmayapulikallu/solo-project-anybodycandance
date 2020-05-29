@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-function* fetchEvent() {
+function* eventSaga() {
+    yield takeLatest('GET_EVENTS', fetchEvents);
+}
+
+function* fetchEvents() {
     try {
         const response = yield axios.get('/api/events');
         console.log(':::::::::',response.data)
@@ -11,8 +15,5 @@ function* fetchEvent() {
     }
 }
 
-function* eventSaga() {
-    yield takeLatest('GET_EVENTS', fetchEvent);
-}
 
 export default eventSaga;

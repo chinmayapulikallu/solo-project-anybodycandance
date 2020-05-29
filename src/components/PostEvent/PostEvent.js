@@ -4,15 +4,20 @@ import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
-    DateTimePicker
+   
+    DateTimePicker,
+    // TimePicker
 } from '@material-ui/pickers';
+
 
 class PostEvent extends Component {
 
     state = {
         event_name: '',
         event_location: '',
-        event_date: new Date()
+        event_date: new Date(),
+        created_date: new Date(),
+       
     }
 
     //Post an event to the database
@@ -34,7 +39,8 @@ class PostEvent extends Component {
     handleDateChange = (date) => {
         this.setState({
              ...this.state,
-            event_date: date
+            event_date: date,
+            created_date: date,
         })
     };
 
@@ -46,8 +52,20 @@ class PostEvent extends Component {
                 <input type="text" placeholder="event name" onChange={(event) => this.handleChange('event_name', event)}/>
                 <input type="location" placeholder="location" onChange={(event) => this.handleChange('event_location', event)}/>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <DateTimePicker value={this.state.event_date} onChange={this.handleDateChange} />
+                    <DateTimePicker value={this.state.event_date} onChange={this.handleDateChange} />  
+                    <DateTimePicker value={this.state.created_date} onChange={this.handleDateChange} />
+
+                    {/* <DatePicker label="Event Date" value={moment(this.state.event_date)} onChange={this.handleDateChange} /> */}
+                    {/* <TimePicker
+                        margin="normal"
+                        label="Time picker"
+                        value={this.state.event_time}
+                        onChange={this.handleDateChange}
+                    /> */}
+                    
+                    {/* <DatePicker label="created date" value={this.state.created_date} onChange={this.handleDateChange} /> */}
                 </MuiPickersUtilsProvider>
+               
                 <button onClick={this.addEvent}>Add Event</button>
 
             </div>
