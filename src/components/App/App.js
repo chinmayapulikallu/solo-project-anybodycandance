@@ -19,6 +19,7 @@ import PostEvent from '../PostEvent/PostEvent';
 import Dancers from '../Dancers/Dancers';
 import NewDancer from '../NewDancer/NewDancer';
 import NewEvent from '../NewEvent/NewEvent';
+import EditEvent from '../EditEvent/EditEvent';
 
 import './App.css';
 
@@ -40,6 +41,7 @@ class App extends Component {
               exact
               path="/about"
               component={AboutPage}
+              isAdminPage="false"
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
@@ -49,6 +51,7 @@ class App extends Component {
               exact
               path="/home"
               component={UserPage}
+              isAdminPage="false"
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
@@ -56,16 +59,19 @@ class App extends Component {
               exact
               path="/info"
               component={InfoPage}
+              isAdminPage="false"
             />
             <ProtectedRoute
               exact
               path="/events"
               component={AllEvents}
+              isAdminPage="false"
             />
             <ProtectedRoute
               exact
               path="/post"
               component={PostEvent}
+              isAdminPage="true"
             />
             <ProtectedRoute
               exact
@@ -81,7 +87,14 @@ class App extends Component {
               exact
               path="/newevent"
               component={NewEvent}
+              isAdminPage="true"
             />
+            <ProtectedRoute
+              exact
+              path="/edit/:id"
+              component={EditEvent}
+            />
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>

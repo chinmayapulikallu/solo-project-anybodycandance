@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
+import { withRouter } from 'react-router-dom';
 
 class AllEvents extends Component {
     componentDidMount() {
@@ -9,9 +9,11 @@ class AllEvents extends Component {
 
     //If an event has to be updated this function dispatches the event id 
     // and deletes the event from database
-    updateEvent = (event) => {
-        console.log('in update event', event);
-        this.props.dispatch({type: 'EDIT_EVENT',payload: event })
+    updateEvent = (id) => {
+        
+        
+        console.log('in update event',id);
+        this.props.history.push('/edit/' + id);
     }
 
     //If an event is cancelled this function dispatches the event id 
@@ -50,7 +52,7 @@ class AllEvents extends Component {
                         <td>{event.event_date}</td>
                         <td>{event.created_date}</td>
                         <td><button onClick={()=> this.deleteEvent(event.id)}>Delete</button></td>
-                        <td><button onClick={(event) => this.updateEvent(event)}>Edit</button></td>
+                        <td><button onClick={() => this.updateEvent(event.id)}>Edit</button></td>
                         </tr>
                         )}
                     </tbody>
@@ -71,4 +73,4 @@ const putReduxStateOnProps = (reduxState) => ({
     events: reduxState.eventReducer
 })
 
-export default connect(putReduxStateOnProps)(AllEvents);
+export default withRouter(connect(putReduxStateOnProps)(AllEvents));

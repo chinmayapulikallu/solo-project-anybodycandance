@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
 
 function* deleteEventSaga() {
@@ -11,6 +11,7 @@ function* deleteEvent(action) {
     try {
         console.log(':::::::::', action.payload)
          yield axios.delete(`/api/events/${action.payload}`);
+         yield put({type: 'GET_EVENTS'});
     } catch (error) {
         console.log(error)
     }

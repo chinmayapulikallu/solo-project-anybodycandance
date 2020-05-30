@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
 
 function* deleteDancerSaga() {
@@ -11,6 +11,7 @@ function* deleteDancer(action) {
     try {
         console.log(':::::::::', action.payload)
         yield axios.delete(`/api/dancers/${action.payload}`);
+        yield put({ type: 'GET_DANCERS' });
     } catch (error) {
         console.log(error)
     }

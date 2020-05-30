@@ -66,17 +66,21 @@ router.post('/', rejectUnauthorized, (req, res) => {
 //route to delete an entry from the events
 router.delete('/:id', (req, res) => {
     console.log('id of event to be deleted.........>', req.params.id);
-    let sqlText = `DELETE FROM dancer_events using "event"
-                    WHERE "event".id = dancer_events.event_id
-                    and "event".id = $1;`;
+    let dancer_events_sql = `DELETE FROM dancer_events where event_id = $1;`
     let values = [req.params.id]
-    pool.query(sqlText, values).then((result) => {
-        console.log(result);
-        res.sendStatus(200);
+    pool.query(dancer_events_sql, values).then((result) => {
+       let events_sql= `DELETE FROM "event" where id = $1;`
+        pool.query(events_sql, values).then((result) => {
+            console.log("event delete", result);
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log('error', error);
+            res.sendStatus(500);
+        });
     }).catch(error => {
         console.log('error', error);
         res.sendStatus(500);
-    });
+    });    
 });
 
 module.exports = router;
