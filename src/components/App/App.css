@@ -83,7 +83,7 @@ input {
 
 link-button:hover {
     color: rgb(92, 171, 213);
-    border-color: rgb(92, 171, 213);
+    border-color: rgb(71, 154, 199);
   }
 
 .loginLinks {
@@ -98,7 +98,7 @@ h3 {
 
 .title {
     color: rgb(23, 133, 193);
-    margin-bottom: 0;
+    margin-bottom: 20;
 }
 
 .menuButton {
@@ -108,11 +108,11 @@ h3 {
 }
 
 .menuButton:hover {
-    color: rgb(92, 171, 213);
+    color: rgb(11, 58, 83);
 }
 
 .menu {
-    color: rgb(20, 169, 223);
+    color: rgb(223, 20, 30);
     display: flex;
     align-items: center;
     justify-content: center;

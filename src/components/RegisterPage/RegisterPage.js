@@ -4,7 +4,9 @@ import { InputAdornment, InputLabel, Input } from '@material-ui/core';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import LockIcon from '@material-ui/icons/Lock';
 import Button from '@material-ui/core/Button';
-import './RegisterPage.css'
+import Swal from 'sweetalert2';
+import './RegisterPage.css';
+import { withRouter } from 'react-router-dom';
 
 class RegisterPage extends Component {
     state = {
@@ -23,8 +25,22 @@ class RegisterPage extends Component {
                     password: this.state.password,
                 },
             });
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'You are logged in ',
+                showConfirmButton: false,
+                timer: 1000
+            })
+            this.props.history.push('/newdancer')
         } else {
             this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `${this.props.errors.registrationMessage}`,
+            })
+
         }
     } // end registerUser
 
@@ -37,37 +53,48 @@ class RegisterPage extends Component {
     render() {
         return (
             <div className="home-image">
-                {this.props.errors.registrationMessage && (
+                {/* {this.props.errors.registrationMessage && (
                     <h2
                         className="alert"
                         role="alert"
                     >
                         {this.props.errors.registrationMessage}
                     </h2>
-                )}
-                <form onSubmit={this.registerUser}>
-                    <h1>Register User</h1>
+                )} */}
+                <form className="login-form" onSubmit={this.registerUser}>
+                    <h1 className="title">Register User</h1>
                     <div>
-                        <label htmlFor="username">
-                            Username:
-              <input
-                                type="text"
-                                name="username"
-                                value={this.state.username}
-                                onChange={this.handleInputChangeFor('username')}
-                            />
-                        </label>
+                        <InputLabel htmlFor = "input-with-icon-adornment">Username</InputLabel>
+                        <Input 
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <PermIdentityIcon />
+                                </InputAdornment>
+                            }
+                            label="Username"
+                            type="text"
+                            name="username"
+                            value={this.state.username}
+                            onChange={this.handleInputChangeFor('username')}
+                        />
                     </div>
+                    <br/>
                     <div>
-                        <label htmlFor="password">
-                            Password:
-              <input
-                                type="password"
-                                name="password"
-                                value={this.state.password}
-                                onChange={this.handleInputChangeFor('password')}
-                            />
-                        </label>
+                        <InputLabel htmlFor = "input-with-icon-adornment">Password</InputLabel>
+                        <Input
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <LockIcon />
+                                </InputAdornment>
+                            }
+                            label="Password"
+                            type="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.handleInputChangeFor('password')}
+                        />
+                        <br />
+                        <br />
                     </div>
                     <div>
                         <input
@@ -77,18 +104,23 @@ class RegisterPage extends Component {
                             value="Register"
                         />
                     </div>
-                </form>
-                <center>
-                    <button
-                        type="button"
-                        className="link-button"
-                        onClick={() => { this.props.dispatch({ type: 'SET_TO_LOGIN_MODE' }) }}
-                    >
-                        Login
-          </button>
-                </center>
-            </div>
-        );
+                    <div className="login-links">
+                        <span style={{ opacity: .5 }}>Already have an account?</span>
+                       
+                    <center>
+                        <Button variant="contained" color="primary"
+                            type="button"
+                            className="link-button"
+                            onClick={() => { this.props.dispatch({ type: 'SET_TO_LOGIN_MODE' }) }}
+                            >
+                            Login
+                        </Button>                  
+                    </center>
+                    </div>
+                    </form>
+                    
+                </div>
+        )                           
     }
 }
 
@@ -99,5 +131,5 @@ const mapStateToProps = state => ({
     errors: state.errors,
 });
 
-export default connect(mapStateToProps)(RegisterPage);
+export default withRouter(connect(mapStateToProps)(RegisterPage));
 
