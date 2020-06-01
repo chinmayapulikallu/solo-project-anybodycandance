@@ -29,16 +29,6 @@ const useStyles = (theme) => ({
         // height: 0,
         // paddingTop: '56.25%', // 16:9
     },
-    // expand: {
-    //     transform: 'rotate(0deg)',
-    //     marginLeft: 'auto',
-    //     transition: theme.transitions.create('transform', {
-    //         duration: theme.transitions.duration.shortest,
-    //     }),
-    // },
-    // expandOpen: {
-    //     transform: 'rotate(180deg)',
-    // },
     avatar: {
         backgroundColor: red[500],
     },
@@ -55,20 +45,40 @@ const useStyles = (theme) => ({
 
 });
 
+
+
 class NewEvent extends Component {
+
+    state = {
+       event_count: 1
+    }
+
     componentDidMount() {
         this.getEvents();
     }
+
+    //get function to dispatch when the pag loads
     getEvents = () => {
         this.props.dispatch({ type: 'GET_NEW_EVENT' });
     }
+
+    //when a user is interested in an event and clicks join button 
+    //this function gets triggered.
+    joinEvent = () => {
+    console.log('in joinEvent');
+        this.setState ({
+           event_count: this.state.event_count + 1
+        })
+        console.log('joinEvent by user', this.state, this.props.user)
+    }
+
     render() { 
         const { classes } = this.props;  
         return(
               <>
                 <Grid container className={classes.root} spacing={2}>
                     <Grid item xs={12}>
-                        <Grid container justify="left" spacing={9}>
+                        <Grid container justify="flex-start" spacing={9}>
                 {this.props.events.map(event => 
                     <span key={event.id}>
                         <Grid key={event.id} item className={classes.cardPadding}>
@@ -94,7 +104,8 @@ class NewEvent extends Component {
                                 <Typography variant="body2" color="textSecondary" component="p">
                                     {event.event_description}
                                 </Typography>
-                                    <Button variant="contained">Join</Button>
+                                    <Button variant="contained" color="primary"
+                                             onClick={this.joinEvent}>Join</Button>
                             </CardContent>
                             <CardActions>
                                 
@@ -116,6 +127,9 @@ class NewEvent extends Component {
 }
 
 const putReduxStateOnProps = (reduxState) => ({
-    events: reduxState.eventReducer
+    events: reduxState.eventReducer,
+    dancers:reduxState.dancerReducer,
+    user: reduxState.user
 })
+
 export default (withStyles(useStyles))(connect(putReduxStateOnProps)(NewEvent));

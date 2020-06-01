@@ -5,16 +5,17 @@ import './NewDancer.css';
 class NewDancer extends Component {
 
     state = {
+        user_id:'',
         first_name: '',
         last_name: '',
         contact_number: '',
         email_id: '',
-        dance_style: ''
+        dance_style: 0
     }
 
     //captures user inputs 
     handleChange = (name, event) => {
-        console.log('in handleChange');
+        console.log('in handleChange', name, event.target.value);
         this.setState({
             ...this.state,
             [name]: event.target.value
@@ -22,13 +23,15 @@ class NewDancer extends Component {
     }
 
     submitDetails = () => {
-        console.log('in submit ');
-        console.log('---->state', this.state)
-        this.props.dispatch({ type: 'SET_DANCER', payload: this.state }) 
+        this.setState({
+            ...this.state,
+            user_id: this.props.user.id
+        }, () => {
+            console.log('in submit hhhh :: ', this.props.user.id, this.state)
+            this.props.dispatch({ type: 'SET_DANCER', payload: this.state }) 
+        })
+        
     }
-
-
-
 
     render() {
         return(
@@ -46,11 +49,11 @@ class NewDancer extends Component {
                     onChange={(event) => this.handleChange('last_name', event)}/>
                 </div>
                 <div>
-                    <input type="text" placeholder="email" 
+                    <input type="text" placeholder="contact number" 
                     onChange={(event) => this.handleChange('contact_number', event)}/>
                 </div>
                 <div>
-                    <input type="text" placeholder="contact number" 
+                    <input type="text" placeholder="email id" 
                     onChange={(event) => this.handleChange('email_id', event)}/>
                 </div>
                 <div>
@@ -76,6 +79,7 @@ class NewDancer extends Component {
 }
 
 const putReduxStateOnProps = (reduxState) => ({
-    dancer: reduxState.dancer
+    dancer: reduxState.dancer,
+    user: reduxState.user
 })
 export default connect(putReduxStateOnProps)(NewDancer);

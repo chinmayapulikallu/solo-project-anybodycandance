@@ -9,12 +9,24 @@ body {
 }
 
 form {
-    background-color: skyblue;
+    /* background-color: skyblue;
     width: 30%;
     height: 250px;
     margin: 450px auto;
     padding: 25px;
-    border-radius: 2px;
+    border-radius: 2px; */
+    background-color: #e0dfcce5;
+    width: 400px;
+    height: 350px;
+    margin: 200px auto; 
+    margin-bottom: 20px;
+    margin-top: 200px;
+
+    padding: 40px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 input {
@@ -23,17 +35,28 @@ input {
 }
 
 .log-in, .log-out, .register {
-  background-color: #00acb0;
+  background-color: #25c02d;
   border-radius: 4px;
   color: #f8f8f8;
   min-height: 50px;
   min-width: 100px;
   outline:0;
   cursor: pointer;
+  /* background-color: rgb(23, 133, 193);
+  color: #ffffff;
+  min-height: 50px;
+  min-width: 200px;
+  outline: 0;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  border-radius: 50px; */
 }
 
 .log-in:hover, .log-out:hover, .register:hover {
   background-color: #008183;
+   /* background-color: rgb(92, 171, 213); */
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
@@ -46,13 +69,52 @@ input {
     outline:0;
     border-bottom:1px solid #444; 
     cursor: pointer;
+    /* background:none;
+    border:none;
+    padding:0;
+    font: inherit;
+    outline:0;
+    color: rgb(23, 133, 193);
+    cursor: pointer;
+    margin-top: 3px; 
+    margin-bottom: 180px;
+} */
 }
 
-.background {
-    background-image: url("/images/beer.jpg");
-    height: 100%;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+link-button:hover {
+    color: rgb(92, 171, 213);
+    border-color: rgb(92, 171, 213);
   }
+
+.loginLinks {
+    text-align: center;
+    font-size: 13px;
+}
+
+h3 {
+    color: rgb(174, 174, 174);
+    margin-bottom: 30px;
+}
+
+.title {
+    color: rgb(23, 133, 193);
+    margin-bottom: 0;
+}
+
+.menuButton {
+    font-size: 50px;
+    margin-left: 10px;
+    padding: 1px 6px;
+}
+
+.menuButton:hover {
+    color: rgb(92, 171, 213);
+}
+
+.menu {
+    color: rgb(20, 169, 223);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

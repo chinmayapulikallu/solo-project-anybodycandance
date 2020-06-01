@@ -75,6 +75,11 @@ class AllEvents extends Component {
                         )}
                     </tbody>
                 </table>
+                <br />
+                <br />
+                <br />
+                <br />
+
                 <div>
                 <button onClick={this.handleBack}>Go Back</button>
                 </div>

@@ -25,10 +25,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
     let query = `INSERT INTO dancer
-                ("first_name", "last_name", "contact_number", "email_id", "dance_style" ) 
-                VALUES ($1, $2, $3, $4, $5);`
-    let values = [req.body.first_name, req.body.last_name, 
-                 req.body.contact_number, req.body.email_id, req.body.dance_style]
+                ("id", "first_name", "last_name", "contact_number", "email_id", "dance_style" ) 
+                VALUES ($1, $2, $3, $4, $5, $6);`
+    let values = [req.body.user_id, req.body.first_name, req.body.last_name, 
+                 req.body.contact_number, req.body.email_id, parseInt(req.body.dance_style)]
+    console.log("new dancer calues ::: ", values)
     pool.query(query, values).then((result) => {
         res.sendStatus(200);
     }).catch((error) => {

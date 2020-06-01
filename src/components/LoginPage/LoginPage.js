@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {InputAdornment, InputLabel, Input} from '@material-ui/core';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+import LockIcon from '@material-ui/icons/Lock';
+import Button from '@material-ui/core/Button';
 import './LoginPage.css'
 
 class LoginPage extends Component {
@@ -41,9 +45,9 @@ class LoginPage extends Component {
                         {this.props.errors.loginMessage}
                     </h2>
                 )}
-                <form onSubmit={this.login}>
-                    <h1>Login</h1>
-                    <div>
+                <form className="login-form" onSubmit={this.login}>
+                    <h1 className="title">Login</h1>
+                    {/* <div>
                         <label htmlFor="username">
                             Username:
                             <input
@@ -64,29 +68,66 @@ class LoginPage extends Component {
                                 onChange={this.handleInputChangeFor('password')}
                             />
                         </label>
-                    </div>
+                    </div> */}
                     <div>
-                        <input
-                            className="log-in"
-                            type="submit"
-                            name="submit"
-                            value="Log In"
+                        <InputLabel htmlFor = "input-with-icon-adornment">Username</InputLabel>
+                        <Input
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <PermIdentityIcon />
+                                </InputAdornment>
+                            }
+                            label="Username"
+                            type="text"
+                            name="username"
+                            value={this.state.username}
+                            onChange={this.handleInputChangeFor('username')}
                         />
                     </div>
+                    <br/>
+                    <div>
+                        <InputLabel htmlFor = "input-with-icon-adornment">Password</InputLabel>
+                        <Input
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <LockIcon />
+                                </InputAdornment>
+                            }
+                            label="Password"
+                            type="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.handleInputChangeFor('password')}
+                        />
+                        <br />
+                        <br />
+
+                    </div>
+                    <input 
+                    className="log-in"
+                    type="submit"
+                    name="submit"
+                    value="Log In"
+                    />
+                    <div className="login-links">
+                        <span style={{opacity: .5}}>Don't have an account?</span>
+                        <br />
+                        <Button variant="contained" color="primary"
+                            type="button"
+                            className="link-button"
+                            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
+                            >
+                            Sign Up
+                        </Button>
+                    </div>
                 </form>
-                <center>
-                    <button
-                        type="button"
-                        className="link-button"
-                        onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
-                    >
-                        Register
-                        </button>
-                      </center>
             </div>
         );
     }
 }
+
+                
+
 
 // Instead of taking everything from state, we just want the error messages.
 // if you wanted you could write this code like this:

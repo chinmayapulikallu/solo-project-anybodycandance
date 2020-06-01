@@ -6,7 +6,7 @@ const { rejectUnauthorized } = require('../modules/authorization-middleware');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 //import sendgrid 
-// const sgMail = require('@sendgrid/mail');
+const sgMail = require('@sendgrid/mail');
 
 /**
  * Get all events
@@ -30,14 +30,14 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 
 //use send grid api key
-// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-// const msg = {
-//     to: ['chaysam503@gmail.com', 'chinmayajyothi.chinni@gmail.com'],
-//     from: 'chinmayapulikallu@gmail.com',
-//     subject: 'Hello from SendGrid',
-//     text: 'New Event!!!!!!!',
-//     html: '<strong>Hello, A new event is posted. Login and check for more details </strong>',
-// };
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const msg = {
+    to: ['chaysam503@gmail.com', 'sushil.testuser@gmail.com'],
+    from: 'chinmayapulikallu@gmail.com',
+    subject: 'Hello from SendGrid',
+    text: 'New Event!!!!!!!',
+    html: '<strong>Hello, A new event is posted. Login and check for more details localhost:3000  </strong>'
+};
 
 /**
  * Add an event by admin 
@@ -51,14 +51,14 @@ router.post('/', rejectUnauthorized, (req, res) => {
     console.log(values)
     pool.query(query, values).then((result) => {
         res.sendStatus(200);
-        // sgMail
-        //     .send(msg)
-        //     .then(() => { }, error => {
-        //         console.error(error);
-        //         if (error.response) {
-        //             console.error(error.response.body)
-        //         }
-        //     });
+        sgMail
+            .send(msg)
+            .then(() => { }, error => {
+                console.error(error);
+                if (error.response) {
+                    console.error(error.response.body)
+                }
+            });
     }).catch((error) => {
         console.log(error)
         res.sendStatus(500);
