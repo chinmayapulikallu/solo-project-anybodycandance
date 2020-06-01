@@ -31,7 +31,7 @@ const ProtectedRoute = (props) => {
     if (user.id) {
         // if the user is logged in (only logged in users have ids)
         // show the component that is protected
-        if (props.isAdminPage == "true" && !user.admin) {
+        if (props.isAdminPage === "true" && !user.admin) {
             ComponentToShow = LoginPage; //TODO change this
         } else {
             ComponentToShow = ComponentToProtect;

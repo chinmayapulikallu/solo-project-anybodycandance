@@ -1,0 +1,15 @@
+.event-name {
+    text-align: center;
+    padding: 20px;
+
+}
+
+.post-event {
+    margin-left: 80px;
+    margin-top: 80px;
+    padding: 20px;
+}
+
+.add-event {
+    padding: 20px;
+}

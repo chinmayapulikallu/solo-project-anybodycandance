@@ -8,6 +8,8 @@ import {
     DateTimePicker,
     // TimePicker
 } from '@material-ui/pickers';
+import './PostEvent.css';
+import { withRouter } from 'react-router-dom';
 
 
 class PostEvent extends Component {
@@ -16,8 +18,9 @@ class PostEvent extends Component {
         event_name: '',
         event_location: '',
         event_date: new Date(),
-        created_date: new Date(),
-       
+        event_image: '',
+        event_dancer_count: '',
+        event_description: ''
     }
 
     //Post an event to the database
@@ -25,6 +28,7 @@ class PostEvent extends Component {
         console.log('in addEvent');
         console.log('---->state', this.state)
         this.props.dispatch({type: 'POST_EVENT', payload:this.state}) 
+        this.props.history.push('/info');
     }
 
     //sets state with new inputs
@@ -39,36 +43,49 @@ class PostEvent extends Component {
     handleDateChange = (date) => {
         this.setState({
              ...this.state,
-            event_date: date,
-            created_date: date,
+            event_date: date
         })
     };
 
 
     render() {
         return (
-            <div>
+            <div className="post-event">
+                <div className="event-name">
                 <h1>Add Event</h1>
-                <input type="text" placeholder="event name" onChange={(event) => this.handleChange('event_name', event)}/>
-                <input type="location" placeholder="location" onChange={(event) => this.handleChange('event_location', event)}/>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <DateTimePicker value={this.state.event_date} onChange={this.handleDateChange} />  
-                    <DateTimePicker value={this.state.created_date} onChange={this.handleDateChange} />
-
-                    {/* <DatePicker label="Event Date" value={moment(this.state.event_date)} onChange={this.handleDateChange} /> */}
-                    {/* <TimePicker
-                        margin="normal"
-                        label="Time picker"
-                        value={this.state.event_time}
-                        onChange={this.handleDateChange}
-                    /> */}
-                    
-                    {/* <DatePicker label="created date" value={this.state.created_date} onChange={this.handleDateChange} /> */}
-                </MuiPickersUtilsProvider>
-               
-                <button onClick={this.addEvent}>Add Event</button>
-
+                </div>
+                <div>
+                <div>
+                    <input type="text" placeholder="event name" 
+                    onChange={(event) => this.handleChange('event_name', event)}/>
+                </div>
+                <div>
+                    <input type="location" placeholder="location" 
+                    onChange={(event) => this.handleChange('event_location', event)} />
+                </div>
+                <div>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                         <DateTimePicker label="event_date" value={this.state.event_date} onChange={this.handleDateChange} />
+                    </MuiPickersUtilsProvider>
+                </div> 
+                <div>
+                    <input type="url" placeholder="image path" 
+                    onChange={(event) => this.handleChange('event_image', event)} />
+                </div>
+                <div>
+                    <input type="number" placeholder="dancer count" 
+                    onChange={(event) => this.handleChange('event_dancer_count', event)} />
+                </div>
+                <div>
+                    <textarea name="event_description" rows="4" cols="50" 
+                    onChange={(event) => this.handleChange('event_description', event)}></textarea>
+                </div>
+                   
+                <div className="add-event">
+                    <button onClick={this.addEvent}>Add Event</button>
+                </div>    
             </div>
+        </div>
         )
     }
 }
@@ -79,4 +96,4 @@ class PostEvent extends Component {
 const putReduxStateOnProps = (reduxState) => ({
     events: reduxState.eventReducer
 })
-export default connect(putReduxStateOnProps)(PostEvent);
+export default withRouter(connect(putReduxStateOnProps)(PostEvent));

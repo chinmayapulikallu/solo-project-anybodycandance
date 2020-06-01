@@ -87,7 +87,7 @@ class App extends Component {
               exact
               path="/newevent"
               component={NewEvent}
-              isAdminPage="true"
+              isAdminPage="false"
             />
             <ProtectedRoute
               exact

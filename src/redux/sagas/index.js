@@ -8,6 +8,8 @@ import dancerSaga from  './dancerSaga';
 import newDancerSaga from './newDancerSaga';
 import deleteEventSaga from './deleteEventSaga';
 import deleteDancerSaga from './deleteDancerSaga';
+import updateEventSaga from './updateEventSaga';
+
 
 
 
@@ -28,6 +30,7 @@ export default function* rootSaga() {
         dancerSaga(),
         newDancerSaga(),
         deleteEventSaga(),
-        deleteDancerSaga()
+        deleteDancerSaga(),
+        updateEventSaga()
     ]);
 }

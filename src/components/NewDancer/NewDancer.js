@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './NewDancer.css';
 
 class NewDancer extends Component {
 
@@ -31,24 +32,44 @@ class NewDancer extends Component {
 
     render() {
         return(
-            <div>
-                <h2>New User Registration</h2>
-                <input type="text" placeholder="first name" onChange={(event) => this.handleChange('first_name', event)}/>
-                <input type="text" placeholder="last name" onChange={(event) => this.handleChange('last_name', event)}/>
-                <input type="text" placeholder="email" onChange={(event) => this.handleChange('contact_number', event)}/>
-                <input type="text" placeholder="contact number" onChange={(event) => this.handleChange('email_id', event)}/>
-                <select onChange={(event) => this.handleChange('dance_style', event)}>
-                    <option value="0">Western</option>
-                    <option value="1">Tap dance</option>
-                    <option value="2">Classical</option>
-                    <option value="3">Break dance</option>
-                    <option value="4">Folk</option>
-                    <option value="5">Modern</option>
-                    <option value="6">Bollywood</option>
-                    <option value="7">Hip-Hop</option>
-                    <option value="6">Semi-Classical</option>
-                </select>
-                <button onClick={this.submitDetails}>Submit</button>
+            <div className="dancer-form">
+                <div className="new-user">
+                    <h2>New User Registration</h2>
+                </div>
+                <div>
+                <div>
+                    <input type="text" placeholder="first name" 
+                    onChange={(event) => this.handleChange('first_name', event)}/>
+                </div>
+                <div>
+                    <input type="text" placeholder="last name" 
+                    onChange={(event) => this.handleChange('last_name', event)}/>
+                </div>
+                <div>
+                    <input type="text" placeholder="email" 
+                    onChange={(event) => this.handleChange('contact_number', event)}/>
+                </div>
+                <div>
+                    <input type="text" placeholder="contact number" 
+                    onChange={(event) => this.handleChange('email_id', event)}/>
+                </div>
+                <div>
+                    <select onChange={(event) => this.handleChange('dance_style', event)}>
+                        <option value="0">Western</option>
+                        <option value="1">Tap dance</option>
+                        <option value="2">Classical</option>
+                        <option value="3">Break dance</option>
+                        <option value="4">Folk</option>
+                        <option value="5">Modern</option>
+                        <option value="6">Bollywood</option>
+                        <option value="7">Hip-Hop</option>
+                        <option value="6">Semi-Classical</option>
+                    </select>
+                </div>
+                <div className="add-dancer">
+                    <button onClick={this.submitDetails}>Submit</button>
+                </div>   
+            </div>
             </div>
         )
     }
