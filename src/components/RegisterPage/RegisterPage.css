@@ -1,0 +1,13 @@
+.home-image {
+    background-image: url("/images/home.jpg");
+    height: 2000px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 50px;
+    }
+
+.login-links {
+    text-align: center
+}

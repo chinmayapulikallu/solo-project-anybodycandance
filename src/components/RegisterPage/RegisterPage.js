@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { InputAdornment, InputLabel, Input } from '@material-ui/core';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+import LockIcon from '@material-ui/icons/Lock';
+import Button from '@material-ui/core/Button';
+import './RegisterPage.css'
 
 class RegisterPage extends Component {
     state = {
@@ -31,7 +36,7 @@ class RegisterPage extends Component {
 
     render() {
         return (
-            <div>
+            <div className="home-image">
                 {this.props.errors.registrationMessage && (
                     <h2
                         className="alert"
