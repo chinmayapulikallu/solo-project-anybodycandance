@@ -4,6 +4,8 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* eventSaga() {
     yield takeLatest('GET_EVENTS', fetchEvents);
     yield takeLatest('GET_NEW_EVENT', fetchNewEvents);
+    yield takeLatest('JOIN_EVENT', joinEvent);
+
 
 }
 
@@ -19,8 +21,9 @@ function* fetchEvents() {
 }
 
 //axios to GET new event from server
-function* fetchNewEvents() {
+function* fetchNewEvents(action) {
     try {
+        console.log('fetchNewEvents.......', action.payload)
         const newEventResponse = yield axios.get('/api/events/recent');
         console.log('.......', newEventResponse.data)
         // yield put({ type: 'SET_NEW_EVENT', payload: newEventResponse.data })
@@ -29,6 +32,18 @@ function* fetchNewEvents() {
         console.log(error);
     }
 }
+
+function * joinEvent(action) {
+    try {
+        yield axios.post('/api/events/join', action.payload);
+        yield put({ type: 'GET_NEW_EVENT' })
+}
+catch (err) {
+        console.log(err)
+}
+}
+
+
 
 
 export default eventSaga;

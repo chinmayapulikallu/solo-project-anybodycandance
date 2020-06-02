@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import './NewEvent.css';
 
 const useStyles = (theme) => ({
     root: {
@@ -31,6 +32,7 @@ const useStyles = (theme) => ({
     },
     avatar: {
         backgroundColor: red[500],
+        width: 60,
     },
     paper: {
         height: 500,
@@ -50,7 +52,7 @@ const useStyles = (theme) => ({
 class NewEvent extends Component {
 
     state = {
-       event_count: 1
+       
     }
 
     componentDidMount() {
@@ -59,23 +61,21 @@ class NewEvent extends Component {
 
     //get function to dispatch when the pag loads
     getEvents = () => {
-        this.props.dispatch({ type: 'GET_NEW_EVENT' });
+        this.props.dispatch({ type: 'GET_NEW_EVENT'});
     }
 
     //when a user is interested in an event and clicks join button 
     //this function gets triggered.
-    joinEvent = () => {
-    console.log('in joinEvent');
-        this.setState ({
-           event_count: this.state.event_count + 1
-        })
-        console.log('joinEvent by user', this.state, this.props.user)
+    joinEvent = (id) => {
+    console.log('in joinEvent', id);
+        this.props.dispatch({type: 'JOIN_EVENT', payload:{user_id: this.props.user.id,
+                                                          event_id: id}})    
     }
 
     render() { 
         const { classes } = this.props;  
         return(
-              <>
+            <div className="new-event-image">
                 <Grid container className={classes.root} spacing={2}>
                     <Grid item xs={12}>
                         <Grid container justify="flex-start" spacing={9}>
@@ -105,7 +105,7 @@ class NewEvent extends Component {
                                     {event.event_description}
                                 </Typography>
                                     <Button variant="contained" color="primary"
-                                             onClick={this.joinEvent}>Join</Button>
+                                             onClick={() => {this.joinEvent(event.id)}}>Join</Button>
                             </CardContent>
                             <CardActions>
                                 
@@ -121,7 +121,7 @@ class NewEvent extends Component {
 
                 </Grid>
 
-            </>  
+            </div>  
         )
     }
 }

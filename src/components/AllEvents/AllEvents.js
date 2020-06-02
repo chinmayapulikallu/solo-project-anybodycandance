@@ -3,6 +3,16 @@ import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import { withStyles } from '@material-ui/core/styles';
 import {
     MuiPickersUtilsProvider,
 
@@ -10,6 +20,43 @@ import {
     // TimePicker
 } from '@material-ui/pickers';
 import './AllEvents.css';
+
+
+
+const useStyles = (theme) => ({
+    table: {
+        minWidth: 650,
+    },
+    dateField: {
+        // color: theme.palette.common.black,
+        // opacity: 1
+        pointerEvents: "none",
+        fontSize: 30,
+        borderBottom: "0px"
+    }
+    // head: {
+    //     backgroundColor: theme.palette.common.black,
+    //     color: theme.palette.common.white,
+    // }
+});
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 30,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+    root: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.action.hover,
+        },
+    },
+}))(TableRow);
 
 class AllEvents extends Component {
     componentDidMount() {
@@ -43,38 +90,41 @@ class AllEvents extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         console.log("upcoming this.props :: ", this.props)
         return (
-            <div>
+            <div className="event-image">
                 <div>
                     <h2 className="event-title">Events List</h2>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Event Name</th>
-                            <th>Location</th>
-                            <th>Date & time</th>                 
-                            <th>Delete</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead className={classes.head}>
+                        <StyledTableRow>
+                            <StyledTableCell>Event Name</StyledTableCell>
+                            <StyledTableCell>Location</StyledTableCell>
+                            <StyledTableCell>Date & time</StyledTableCell>                 
+                            <StyledTableCell>Delete</StyledTableCell>
+                            <StyledTableCell>Edit</StyledTableCell>
+                        </StyledTableRow>
+                    </TableHead>
+                    <TableBody>
                         {this.props.events.map(event => 
-                        <tr key={event.id}>
-                            <td>{event.event_name}</td>
-                            <td>{event.event_location}</td>
-                            <td>
+                        <StyledTableRow key={event.id}>
+                            <StyledTableCell>{event.event_name}</StyledTableCell>
+                            <StyledTableCell>{event.event_location}</StyledTableCell>
+                            <StyledTableCell>
                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        <DateTimePicker value={event.event_date} disabled/>
+                                        <DateTimePicker className={classes.dateField} value={event.event_date}/>
                                     </MuiPickersUtilsProvider>
-                            </td>                        
-                            <td><button onClick={()=> this.deleteEvent(event.id)}>Delete</button></td>
-                            <td><button onClick={() => this.updateEvent(event.id)}>Edit</button></td>
-                        </tr>
+                            </StyledTableCell> 
+                                <TableCell align="left"><IconButton aria-label="delete" onClick={() => this.deleteEvent(event.id)}>
+                                    <DeleteIcon fontSize="large"/></IconButton></TableCell>
+                                    <TableCell  align="left"><IconButton aria-label="delete" onClick={() => this.updateEvent(event.id)}>
+                                    <EditIcon fontSize="large"/></IconButton></TableCell>                        
+                        </StyledTableRow>
                         )}
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
                 <br />
                 <br />
                 <br />
@@ -83,7 +133,14 @@ class AllEvents extends Component {
                 <div>
                 <button onClick={this.handleBack}>Go Back</button>
                 </div>
+            
+                    
             </div>
+
+     
+            
+
+
         )
     }
 }
@@ -92,4 +149,4 @@ const putReduxStateOnProps = (reduxState) => ({
     events: reduxState.eventReducer
 })
 
-export default withRouter(connect(putReduxStateOnProps)(AllEvents));
+export default (withStyles(useStyles))(withRouter(connect(putReduxStateOnProps)(AllEvents)));

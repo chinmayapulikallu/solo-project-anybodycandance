@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import './RegisterPage.css';
 import { withRouter } from 'react-router-dom';
 
+
 class RegisterPage extends Component {
     state = {
         username: '',
@@ -52,6 +53,8 @@ class RegisterPage extends Component {
 
     render() {
         return (
+
+
             <div className="home-image">
                 {/* {this.props.errors.registrationMessage && (
                     <h2

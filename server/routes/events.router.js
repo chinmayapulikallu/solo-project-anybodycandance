@@ -110,11 +110,18 @@ router.put('/:id', (req,res) => {
  * Get new event posted by admin
  */
 router.get('/recent', rejectUnauthenticated, (req, res) => {
-    console.log('in router get');
-    const sqlText = `SELECT *
-                     FROM  event ORDER BY  created_date DESC LIMIT 5`;
+    console.log('in router get', req.user.id);
+    // const sqlText = `SELECT *
+    //                  FROM  event ORDER BY  created_date DESC LIMIT 5`;
+    const sqlText = `SELECT "event".*, count(dancer_events.dancer_id) as current_dancer_count FROM "event" 
+                        LEFT outer JOIN "dancer_events" ON "event".id = "dancer_events".event_id 
+                        group by dancer_events.event_id, "event".id 
+                        having "event".id not in 
+                            (select distinct(event_id) from dancer_events where dancer_id=$1) 
+                        ORDER BY created_date DESC;`;
+    let values = [req.user.id]
     pool
-        .query(sqlText)
+        .query(sqlText, values)
         .then((result) => {
             res.send(result.rows);
         })
@@ -122,6 +129,22 @@ router.get('/recent', rejectUnauthenticated, (req, res) => {
             console.log(`Error making database query ${sqlText}`, error);
             res.sendStatus(500);
         });
+});
+
+
+
+//Join event
+router.post('/join', rejectUnauthenticated, (req, res) => {
+    let query = `INSERT INTO dancer_events ("dancer_id", "event_id") VALUES ($1, $2);`;
+    
+    let values = [req.body.user_id, req.body.event_id ]
+    console.log(values)
+    pool.query(query, values).then((result) => {
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log(error)
+        res.sendStatus(500);
+    })
 });
 
 module.exports = router;
