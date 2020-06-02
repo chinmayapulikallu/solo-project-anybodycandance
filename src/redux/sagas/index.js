@@ -3,12 +3,8 @@ import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import eventSaga from './eventSaga';
-import postEventSaga from './postEventSaga';
 import dancerSaga from  './dancerSaga';
-import newDancerSaga from './newDancerSaga';
-import deleteEventSaga from './deleteEventSaga';
-import deleteDancerSaga from './deleteDancerSaga';
-import updateEventSaga from './updateEventSaga';
+
 
 
 
@@ -25,12 +21,7 @@ export default function* rootSaga() {
         loginSaga(),
         registrationSaga(),
         userSaga(),
-        eventSaga(),
-        postEventSaga(),
-        dancerSaga(),
-        newDancerSaga(),
-        deleteEventSaga(),
-        deleteDancerSaga(),
-        updateEventSaga()
+        eventSaga(), 
+        dancerSaga()      
     ]);
 }

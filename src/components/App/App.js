@@ -15,11 +15,11 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import AllEvents from '../AllEvents/AllEvents';
-import PostEvent from '../PostEvent/PostEvent';
+import CreateEvent from '../CreateEvent/CreateEvent';
 import Dancers from '../Dancers/Dancers';
 import NewDancer from '../NewDancer/NewDancer';
 import NewEvent from '../NewEvent/NewEvent';
-import EditEvent from '../EditEvent/EditEvent';
+import UpdateEvent from '../UpdateEvent/UpdateEvent';
 
 import './App.css';
 
@@ -63,19 +63,19 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/events"
+              path="/event"
               component={AllEvents}
               isAdminPage="false"
             />
             <ProtectedRoute
               exact
-              path="/post"
-              component={PostEvent}
+              path="/create"
+              component={CreateEvent}
               isAdminPage="true"
             />
             <ProtectedRoute
               exact
-              path="/dancers"
+              path="/dancer"
               component={Dancers}
             />
             <ProtectedRoute
@@ -92,7 +92,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/edit/:id"
-              component={EditEvent}
+              component={UpdateEvent}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

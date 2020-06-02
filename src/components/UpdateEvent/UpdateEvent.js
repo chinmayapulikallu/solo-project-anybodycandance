@@ -9,10 +9,10 @@ import {
     // TimePicker
 } from '@material-ui/pickers';
 import { withRouter } from 'react-router-dom';
-import  './EditEvent.css';
+import  './UpdateEvent.css';
 
 
-class EditEvent extends Component {
+class UpdateEvent extends Component {
 
     state = {
         id: '',
@@ -25,7 +25,7 @@ class EditEvent extends Component {
         //I have used match params id to get the /:id of a particular event
         const currentId = this.props.match.params.id //id in url
         const currentEvent = this.props.events.find(event => event.id === parseInt(currentId))
-        console.log("EditEvent :: ", currentId, currentEvent)
+        console.log("UpdateEvent :: ", currentId, currentEvent)
         this.setState({
             id: currentEvent.id,
             event_name: currentEvent.event_name,
@@ -70,7 +70,7 @@ class EditEvent extends Component {
         return (
             <div className="edit-event">
                 <div className="edit-heading">
-                   <h2>Edit Event</h2> 
+                   <h2>Update Event</h2> 
                 </div>
                 <div>
                 <input type="text" placeholder="event name"
@@ -102,4 +102,4 @@ class EditEvent extends Component {
 const putReduxStateOnProps = (reduxState) => ({
     events: reduxState.eventReducer
 })
-export default withRouter(connect(putReduxStateOnProps)(EditEvent));
+export default withRouter(connect(putReduxStateOnProps)(UpdateEvent));

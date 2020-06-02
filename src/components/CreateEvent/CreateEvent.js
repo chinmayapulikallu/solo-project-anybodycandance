@@ -8,11 +8,11 @@ import {
     DateTimePicker,
     // TimePicker
 } from '@material-ui/pickers';
-import './PostEvent.css';
+import './CreateEvent.css';
 import { withRouter } from 'react-router-dom';
 
 
-class PostEvent extends Component {
+class CreateEvent extends Component {
 
     state = {
         event_name: '',
@@ -27,7 +27,7 @@ class PostEvent extends Component {
     addEvent = () => {
         console.log('in addEvent');
         console.log('---->state', this.state)
-        this.props.dispatch({type: 'POST_EVENT', payload:this.state}) 
+        this.props.dispatch({type: 'CREATE_EVENT', payload:this.state}) 
         this.props.history.push('/info');
     }
 
@@ -96,4 +96,4 @@ class PostEvent extends Component {
 const putReduxStateOnProps = (reduxState) => ({
     events: reduxState.eventReducer
 })
-export default withRouter(connect(putReduxStateOnProps)(PostEvent));
+export default withRouter(connect(putReduxStateOnProps)(CreateEvent));
