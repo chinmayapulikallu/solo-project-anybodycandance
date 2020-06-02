@@ -59,7 +59,7 @@ class NewEvent extends Component {
         this.getEvents();
     }
 
-    //get function to dispatch when the pag loads
+    //get function to dispatch when the page loads
     getEvents = () => {
         this.props.dispatch({ type: 'GET_NEW_EVENT'});
     }
@@ -74,12 +74,23 @@ class NewEvent extends Component {
 
     render() { 
         const { classes } = this.props;  
+        // let joinEvent = (
+        // if(this.props.events.event_dancer_count !== this.props.events.current_dancer_count) {
+        //     <Button variant="contained" color="primary"
+        //     onClick={() => { this.joinEvent(event.id) }}>Join</Button>
+        // )
+        // } else {
+        //         joinEvent = (
+        //             <Button variant="contained" color="primary"
+        //               >Full</Button>
+        //         )
+        // }
         return(
             <div className="new-event-image">
                 <Grid container className={classes.root} spacing={2}>
                     <Grid item xs={12}>
                         <Grid container justify="flex-start" spacing={9}>
-                {this.props.events.map(event => 
+                {this.props.events.map(event =>
                     <span key={event.id}>
                         <Grid key={event.id} item className={classes.cardPadding}>
                         <Card variant="outlined" className={classes.paper}>
@@ -104,8 +115,10 @@ class NewEvent extends Component {
                                 <Typography variant="body2" color="textSecondary" component="p">
                                     {event.event_description}
                                 </Typography>
+                                    {event.event_dancer_count > event.current_dancer_count &&
                                     <Button variant="contained" color="primary"
-                                             onClick={() => {this.joinEvent(event.id)}}>Join</Button>
+                                    onClick={() => {this.joinEvent(event.id)}}>Join</Button> }
+                                    
                             </CardContent>
                             <CardActions>
                                 

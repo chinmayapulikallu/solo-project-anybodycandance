@@ -1,9 +1,16 @@
-.event-image {
-    background-image: url("/images/orange.jpg");
+.about-image {
+    background-image: url("/images/pink_waves.jpg");
     height: 2000px;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 50px;
+}
+
+.about-title {
+    text-align: center;
+    margin: 20%;
+    font-size: 50px;
+    font-family: "Times New Roman", Times, serif;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import './AboutPage.css';
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -6,9 +7,9 @@ import React from 'react';
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 const AboutPage = () => (
-    <div>
+    <div className="about-image">
         <div>
-            <p>Any Body Can Dance is a dance app for dancers.</p>
+            <h2 className="about-title">Any Body Can Dance is a dance app for dancers.</h2>
         </div>
     </div>
 )

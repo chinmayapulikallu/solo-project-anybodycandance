@@ -6,7 +6,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
+// import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import IconButton from '@material-ui/core/IconButton';
@@ -65,9 +65,7 @@ class AllEvents extends Component {
 
     //If an event has to be updated this function dispatches the event id 
     // and deletes the event from database
-    updateEvent = (id) => {
-        
-        
+    updateEvent = (id) => {      
         console.log('in update event',id);
         this.props.history.push('/edit/' + id);
     }
@@ -86,7 +84,7 @@ class AllEvents extends Component {
     }
 
     handleBack = () => {
-        this.props.history.push('/info');
+        this.props.history.push('/home');
     }
 
     render() {

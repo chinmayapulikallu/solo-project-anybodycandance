@@ -8,8 +8,7 @@ function* eventSaga() {
     yield takeLatest('DELETE_EVENT', deleteEvent);
     yield takeLatest('CREATE_EVENT', addEvent);
     yield takeLatest('UPDATE_EVENT', updateEvent);
-
-
+    yield takeLatest('GET_MY_EVENT', fetchMyEvent);
 }
 
 //axios to GET all events from server
@@ -42,18 +41,27 @@ function* addEvent(action) {
 
 
 //axios to GET new event from server
-function* fetchNewEvents(action) {
+function* fetchNewEvents() {
     try {
-        console.log('fetchNewEvents.......', action.payload)
         const newEventResponse = yield axios.get('/api/event/recent');
         console.log('.......', newEventResponse.data)
-        // yield put({ type: 'SET_NEW_EVENT', payload: newEventResponse.data })
         yield put({ type: 'SET_EVENTS', payload: newEventResponse.data  })
     } catch (error) {
         console.log(error);
     }
 }
 
+
+//axios to GET event list a dancer is part of
+function* fetchMyEvent() {
+    try {
+        const myEventResponse = yield axios.get('/api/event/myevent');
+        console.log('.......', myEventResponse.data)
+        yield put({ type: 'SET_EVENTS', payload: myEventResponse.data })
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 //update an event when there's a change in the event
 function* updateEvent(action) {
@@ -69,7 +77,7 @@ function* updateEvent(action) {
     }
 }
 
-//dancer can join an event if intrested
+//dancer can join an event if interested
 function * joinEvent(action) {
     try {
         yield axios.post('/api/event/join', action.payload);
@@ -86,7 +94,7 @@ function* deleteEvent(action) {
     try {
         console.log(':::::::::', action.payload)
         yield axios.delete(`/api/event/${action.payload}`);
-        yield put({ type: 'GET_EVENTS' });
+        yield put({ type: 'GET_MY_EVENT' });
     } catch (error) {
         console.log(error)
     }

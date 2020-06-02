@@ -147,4 +147,23 @@ router.post('/join', rejectUnauthenticated, (req, res) => {
     })
 });
 
+
+//get event list of one user
+router.get('/myevent', rejectUnauthenticated, (req, res) => {
+    console.log('in router get event of one user');
+    const sqlText = `SELECT "event".* FROM
+                     "event" JOIN dancer_events ON dancer_events.event_id = "event".id 
+                     WHERE dancer_events.dancer_id=$1;`;
+    let values = [req.user.id]
+    pool
+        .query(sqlText, values)
+        .then((result) => {
+            res.send(result.rows);
+        })
+        .catch((error) => {
+            console.log(`Error making database query ${sqlText}`, error);
+            res.sendStatus(500);
+        });
+});
+
 module.exports = router;

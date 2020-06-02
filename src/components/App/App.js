@@ -13,13 +13,13 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import AllEvents from '../AllEvents/AllEvents';
 import CreateEvent from '../CreateEvent/CreateEvent';
 import Dancers from '../Dancers/Dancers';
 import NewDancer from '../NewDancer/NewDancer';
 import NewEvent from '../NewEvent/NewEvent';
 import UpdateEvent from '../UpdateEvent/UpdateEvent';
+import MyEvents from '../MyEvents/MyEvents';
 
 import './App.css';
 
@@ -57,15 +57,9 @@ class App extends Component {
             they will see the info page instead. */}
             <ProtectedRoute
               exact
-              path="/info"
-              component={InfoPage}
-              isAdminPage="false"
-            />
-            <ProtectedRoute
-              exact
               path="/event"
               component={AllEvents}
-              isAdminPage="false"
+              isAdminPage="true"
             />
             <ProtectedRoute
               exact
@@ -77,6 +71,7 @@ class App extends Component {
               exact
               path="/dancer"
               component={Dancers}
+              isAdminPage="true"
             />
             <ProtectedRoute
               exact
@@ -93,6 +88,11 @@ class App extends Component {
               exact
               path="/edit/:id"
               component={UpdateEvent}
+            />
+            <ProtectedRoute
+              exact
+              path="/myevent"
+              component={MyEvents}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}
