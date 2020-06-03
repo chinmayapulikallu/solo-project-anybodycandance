@@ -19,6 +19,7 @@ import {
     DateTimePicker,
     // TimePicker
 } from '@material-ui/pickers';
+import Button from '@material-ui/core/Button';
 import './AllEvents.css';
 
 
@@ -59,12 +60,30 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 class AllEvents extends Component {
+
+
     componentDidMount() {
         this.getEvents();
     }
 
+
+    //On click renders create event page
+    createEvent = () => {
+        console.log('in create event');
+        this.props.history.push('/create')
+    }
+
+
+    //On click renders dancers list
+    viewDancers = () => {
+        console.log('in dancers');
+        this.props.history.push('/dancer')
+    }
+
+
+
     //If an event has to be updated this function dispatches the event id 
-    // and deletes the event from database
+    // and updates the event in database
     updateEvent = (id) => {      
         console.log('in update event',id);
         this.props.history.push('/edit/' + id);
@@ -79,19 +98,27 @@ class AllEvents extends Component {
 
 
 
+    //on page loading componentDidMount calls this function
+    //to dispatch and get all the events from database
     getEvents = () => {
         this.props.dispatch({type: 'GET_EVENTS'});
     }
 
-    handleBack = () => {
-        this.props.history.push('/home');
-    }
+
+    // handleBack = () => {
+    //     this.props.history.push('/home');
+    // }
 
     render() {
         const { classes } = this.props;
         console.log("upcoming this.props :: ", this.props)
         return (
             <div className="event-image">
+                <Button variant="contained" color="primary"
+                    onClick={() => this.createEvent()}>Create Event</Button>
+                <Button variant="contained" color="primary"
+                    onClick={() => this.viewDancers()}>View Dancers</Button>
+
                 <div>
                     <h2 className="event-title">Events List</h2>
                 </div>
@@ -128,9 +155,9 @@ class AllEvents extends Component {
                 <br />
                 <br />
 
-                <div>
+                {/* <div>
                 <button onClick={this.handleBack}>Go Back</button>
-                </div>
+                </div> */}
             
                     
             </div>

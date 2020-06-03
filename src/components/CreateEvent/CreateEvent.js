@@ -28,7 +28,12 @@ class CreateEvent extends Component {
         console.log('in addEvent');
         console.log('---->state', this.state)
         this.props.dispatch({type: 'CREATE_EVENT', payload:this.state}) 
-        this.props.history.push('/info');
+        this.props.history.push('/home');
+    }
+
+    //cancels the inputs and goes back to home
+    cancelCreate = () => {
+        this.props.history.push('/home');
     }
 
     //sets state with new inputs
@@ -52,7 +57,7 @@ class CreateEvent extends Component {
         return (
             <div className="post-event">
                 <div className="event-name">
-                <h1>Add Event</h1>
+                <h1>Create Event</h1>
                 </div>
                 <div>
                 <div>
@@ -82,7 +87,8 @@ class CreateEvent extends Component {
                 </div>
                    
                 <div className="add-event">
-                    <button onClick={this.addEvent}>Add Event</button>
+                    <button onClick={this.addEvent}>Create Event</button>
+                        <button onClick={this.cancelCreate}>Cancel</button>
                 </div>    
             </div>
         </div>

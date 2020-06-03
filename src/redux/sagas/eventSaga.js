@@ -94,7 +94,7 @@ function* deleteEvent(action) {
     try {
         console.log(':::::::::', action.payload)
         yield axios.delete(`/api/event/${action.payload}`);
-        yield put({ type: 'GET_MY_EVENT' });
+        yield put({ type: 'GET_EVENTS' });
     } catch (error) {
         console.log(error)
     }

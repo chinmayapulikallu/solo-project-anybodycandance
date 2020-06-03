@@ -4,8 +4,8 @@ import {InputAdornment, InputLabel, Input} from '@material-ui/core';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import LockIcon from '@material-ui/icons/Lock';
 import Button from '@material-ui/core/Button';
-import Swal from 'sweetalert2';
-import './LoginPage.css'
+
+import './LoginPage.css';
 
 class LoginPage extends Component {
     state = {
@@ -24,21 +24,8 @@ class LoginPage extends Component {
                     password: this.state.password,
                 },
             });
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'You are logged in ',
-                showConfirmButton: false,
-                timer: 1000
-            })
         } else {
-            this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: `${this.props.errors.loginMessage}`,
-            })
-
+            this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });     
         }
     } // end login
 
@@ -52,18 +39,19 @@ class LoginPage extends Component {
         return (
             <div className="home-image">
                 {/* {this.props.errors.loginMessage && (
-                    // Swal.fire({
-                    //     icon: 'error',
-                    //     title: 'Oops...',
-                    //     text: `${this.props.errors.loginMessage}`,
-                    // })
-
-                    // <h2
-                    //     className="alert"
-                    //     role="alert"
-                    // >
-                    //     {this.props.errors.loginMessage}
-                    // </h2>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: `${this.props.errors.loginMessage}`,
+                    })
+                )} */}
+                {/* {this.props.errors.loginMessage && (
+                    <h2
+                        className="alert"
+                        role="alert"
+                    >
+                        {this.props.errors.loginMessage}
+                    </h2>
                 )} */}
                 <form className="login-form" onSubmit={this.login}>
                     <h1 className="title">Login</h1>

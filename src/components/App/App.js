@@ -20,6 +20,7 @@ import NewDancer from '../NewDancer/NewDancer';
 import NewEvent from '../NewEvent/NewEvent';
 import UpdateEvent from '../UpdateEvent/UpdateEvent';
 import MyEvents from '../MyEvents/MyEvents';
+import LoginPage from '../LoginPage/LoginPage';
 
 import './App.css';
 

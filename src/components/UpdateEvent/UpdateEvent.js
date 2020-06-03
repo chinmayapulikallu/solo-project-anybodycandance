@@ -60,7 +60,7 @@ class UpdateEvent extends Component {
     updateEvent = () => {
         console.log('in update event');
         this.props.dispatch({type:'UPDATE_EVENT', payload:this.state})
-        this.props.history.push('/info');
+        this.props.history.push('/home');
     }
 
     

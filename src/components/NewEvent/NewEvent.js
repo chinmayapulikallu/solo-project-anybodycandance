@@ -14,6 +14,8 @@ import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import './NewEvent.css';
+import MapBox from '../MapBox/MapBox';
+// import ReactMapGL, { Marker } from 'react-map-gl';
 
 const useStyles = (theme) => ({
     root: {
@@ -74,17 +76,6 @@ class NewEvent extends Component {
 
     render() { 
         const { classes } = this.props;  
-        // let joinEvent = (
-        // if(this.props.events.event_dancer_count !== this.props.events.current_dancer_count) {
-        //     <Button variant="contained" color="primary"
-        //     onClick={() => { this.joinEvent(event.id) }}>Join</Button>
-        // )
-        // } else {
-        //         joinEvent = (
-        //             <Button variant="contained" color="primary"
-        //               >Full</Button>
-        //         )
-        // }
         return(
             <div className="new-event-image">
                 <Grid container className={classes.root} spacing={2}>
@@ -133,6 +124,7 @@ class NewEvent extends Component {
                     </Grid>
 
                 </Grid>
+                {/* <MapBox />  */}
 
             </div>  
         )

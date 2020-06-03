@@ -1,0 +1,26 @@
+.user-image {
+    background-image: url("/images/pink_waves.jpg");
+    height: 2000px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 50px;
+}
+
+#welcome {
+    margin: 2%;
+    padding: 2%;
+    text-align: center;
+    font-size: 40px;
+}
+
+.user-link {
+    margin: 0%;
+    padding: 2%;
+    background-color: skyblue;
+    display: inline-block;
+    width: 6%;
+    height: 70%;
+    font-size: 20px;
+}

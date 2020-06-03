@@ -67,7 +67,7 @@ router.post('/', rejectUnauthorized, (req, res) => {
 
 
 //route to delete an entry from the events
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthorized,  (req, res) => {
     console.log('id of event to be deleted.........>', req.params.id);
     let dancer_events_sql = `DELETE FROM dancer_events where event_id = $1;`
     let values = [req.params.id]
@@ -88,7 +88,7 @@ router.delete('/:id', (req, res) => {
 
 
 //Update event details where there is a change in the event
-router.put('/:id', (req,res) => {
+router.put('/:id', rejectUnauthorized, (req,res) => {
     let id = req.params.id;
     let event_name = req.body.event_name;
     let event_location = req.body.event_location;
