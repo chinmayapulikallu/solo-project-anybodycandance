@@ -12,6 +12,8 @@ import IconButton from '@material-ui/core/IconButton';
 // import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+
 
 
 
@@ -32,7 +34,7 @@ const useStyles = (theme) => ({
     },
     avatar: {
         backgroundColor: red[500],
-        width: 60,
+        width: 40,
     },
     paper: {
         height: 500,
@@ -77,7 +79,7 @@ class MyEvents extends Component {
                                                 <CardHeader
                                                     avatar={
                                                         <Avatar aria-label="recipe" className={classes.avatar}>
-                                                          
+                                                            <CheckCircleIcon />
                                                         </Avatar>
                                                     }
                                                     action={
@@ -113,33 +115,7 @@ class MyEvents extends Component {
                         </Grid>
 
                     </Grid>
-
-                </div>  
-
-
-
-
-
-
-
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Event Name</th>
-                            <th>Event Location</th>
-                            <th>Event Date & Time</th>      
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.events.map(event => <tr key={event.id}>
-                            <td>{event.event_name}</td>
-                            <td>{event.event_location}</td>
-                            <td>{event.event_date}</td>
-                        </tr>
-                        )}
-                    </tbody>
-                </table>
+                </div>                
             </div>
         )
     }
