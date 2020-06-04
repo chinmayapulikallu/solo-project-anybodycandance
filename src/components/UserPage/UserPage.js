@@ -22,10 +22,7 @@ class UserPage extends Component {
             infoData = (
                 <>
                   <NewEvent />
-                </>
-                    
-                    
-                
+                </>                    
             )
         }
 

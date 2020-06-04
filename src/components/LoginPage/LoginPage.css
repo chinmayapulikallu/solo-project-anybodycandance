@@ -12,3 +12,10 @@
     text-align: center
 }
 
+.login-title {
+    text-align: center;
+    margin: 6%;
+    padding: 3%;
+    font-size: 30px;
+    color: #A7412B;
+}

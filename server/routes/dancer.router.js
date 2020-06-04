@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthorized } = require('../modules/authorization-middleware');
 
 /**
  * GET route for dancers
@@ -40,7 +41,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 
 //route to delete a dancer from the database
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthorized, (req, res) => {
     let values = [req.params.id]
     let dancer_events_sql = `DELETE FROM dancer_events where dancer_id = $1;`
     pool.query(dancer_events_sql, values).then((result) => {

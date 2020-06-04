@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 //material - ui
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -13,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-
+import Button from '@material-ui/core/Button';
 
 
 
@@ -63,12 +64,20 @@ class MyEvents extends Component {
         this.props.dispatch({ type: 'GET_MY_EVENT' });
     }
 
+    //Once the user views events redirects to home page
+    handleHome = () => {
+        this.props.history.push('/home');
+    }
+
     render() {
         const { classes } = this.props;  
         return (
             <div>
-                <h2>My Events</h2>
+                
                 <div className="new-event-image">
+                    <Button variant="contained" color="secondary"
+                        onClick={this.handleHome}>My Events</Button>
+                    <h2>My Events</h2>
                     <Grid container className={classes.root} spacing={2}>
                         <Grid item xs={12}>
                             <Grid container justify="flex-start" spacing={9}>
@@ -127,4 +136,4 @@ const putReduxStateOnProps = (reduxState) => ({
     user: reduxState.user
 })
 
-export default (withStyles(useStyles))(connect(putReduxStateOnProps)(MyEvents));
+export default (withStyles(useStyles))(withRouter(connect(putReduxStateOnProps)(MyEvents)));

@@ -11,6 +11,36 @@ import {
 import { withRouter } from 'react-router-dom';
 import  './UpdateEvent.css';
 
+import TextField from '@material-ui/core/TextField';
+import clsx from 'clsx';
+import { withStyles } from '@material-ui/core/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Button from '@material-ui/core/Button';
+
+
+const useStyles = (theme) => ({
+    root: {
+        // display: 'flex',
+        // flexWrap: 'wrap'
+    },
+    margin: {
+        margin: theme.spacing(2),
+    },
+    withoutLabel: {
+        marginTop: theme.spacing(4),
+    },
+    textField: {
+        width: '120ch',
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
+});
+
 
 class UpdateEvent extends Component {
 
@@ -37,7 +67,7 @@ class UpdateEvent extends Component {
     //If the admin wants to go back to info page this function pushes to '/info'
     handleGoBack = () => {
         console.log('in handleGoBack');
-        this.props.history.push('/info')
+        this.props.history.push('/home')
     }
 
     //updates state when there is a change in event location
@@ -63,34 +93,59 @@ class UpdateEvent extends Component {
         this.props.history.push('/home');
     }
 
-    
-
 
     render() {
+        const { classes } = this.props; 
         return (
             <div className="edit-event">
                 <div className="edit-heading">
                    <h2>Update Event</h2> 
                 </div>
-                <div>
-                <input type="text" placeholder="event name"
-                            value={this.state.event_name} 
-                            onChange={(event) => this.handleChange('event_name', event)} />
-                 </div>
-                 <div>
-                    <input type="location" value={this.state.event_location} placeholder="location"
-                        onChange={(event) => this.handleChange('event_location', event)} />
-                </div>
-                <div>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DateTimePicker label="event_date"value={this.state.event_date} 
-                                                onChange={this.handleDateChange} />
-                    </MuiPickersUtilsProvider>
-                </div>
+                <TextField
+                    label="Event Name"
+                    id="outlined-start-adornment"
+                    className={clsx(classes.margin, classes.textField)}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start">
+                            {this.state.event_name} 
+                        </InputAdornment>,
+                    }}
+                    variant="outlined"
+                    onChange={(event) => this.handleChange('event_name', event)}
+                />
+                <TextField
+                    label="Event Location"
+                    id="outlined-start-adornment"
+                    className={clsx(classes.margin, classes.textField)}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start">
+                            {this.state.event_location}
+                        </InputAdornment>,
+                    }}
+                    variant="outlined"
+                    onChange={(event) => this.handleChange('event_name', event)}
+                />
+                <TextField
+                    label="Event Date & Time"
+                    id="outlined-start-adornment"
+                    className={clsx(classes.margin, classes.textField)}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start">
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <DateTimePicker  value={this.state.event_date}
+                                    onChange={this.handleDateChange} />
+                            </MuiPickersUtilsProvider>
+                        </InputAdornment>,
+                    }}
+                    variant="outlined"
+                    onChange={(event) => this.handleChange('event_name', event)}
+                />
                 <div>
                     <div className="edit-link">
-                        <button onClick={this.updateEvent}>Save Update</button>
-                        <button onClick={this.handleGoBack}>Go Back</button>
+                        <Button variant="contained" color="primary"
+                        onClick={this.updateEvent}>Save Update</Button>
+                        <Button variant="contained" color="secondary"
+                        onClick={this.handleGoBack}>Go Back</Button>
                     </div>                
                 </div>
             </div>
@@ -102,4 +157,4 @@ class UpdateEvent extends Component {
 const putReduxStateOnProps = (reduxState) => ({
     events: reduxState.eventReducer
 })
-export default withRouter(connect(putReduxStateOnProps)(UpdateEvent));
+export default (withStyles(useStyles))(withRouter(connect(putReduxStateOnProps)(UpdateEvent)));

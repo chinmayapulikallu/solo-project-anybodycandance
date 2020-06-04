@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 //material - ui
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -9,13 +10,16 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import './NewEvent.css';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 import MapBox from '../MapBox/MapBox';
-// import ReactMapGL, { Marker } from 'react-map-gl';
+
 
 const useStyles = (theme) => ({
     root: {
@@ -45,17 +49,28 @@ const useStyles = (theme) => ({
     },
     cardPadding: {
         padding:30
-    }
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalPaper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
 
 });
 
 
 
 class NewEvent extends Component {
-
     state = {
-       
-    }
+        openValue: false
+    };
+    
 
     componentDidMount() {
         this.getEvents();
@@ -64,6 +79,31 @@ class NewEvent extends Component {
     //get function to dispatch when the page loads
     getEvents = () => {
         this.props.dispatch({ type: 'GET_NEW_EVENT'});
+    }
+
+    //modal function to display when clicked on image
+    handleOpen = () => {
+        // document.getElementById('dataDivId44').innerHTML = "jjjjjjjjjjj"
+        
+        this.setState({
+            openValue: true,
+        });
+        console.log("handleOpen :: ", document.getElementById('dataDivId44'))
+        // openVal = true
+        // setOpenVal(true);
+    };
+
+    //closes modal on click
+    handleClose = () => {
+       this.setState({
+           openValue: false,
+       });
+    };
+
+
+    //allows user to view events under his account
+    handleMyEvents = () => {
+        this.props.history.push('/myevent')
     }
 
     //when a user is interested in an event and clicks join button 
@@ -75,16 +115,43 @@ class NewEvent extends Component {
     }
 
     render() { 
-        const { classes } = this.props;  
+        const { classes } = this.props;
+        const openVal = false
+        const setOpenVal = {}
         return(
             <div className="new-event-image">
+                <Button variant="contained" color="primary"
+                onClick={this.handleMyEvents}>My Events</Button>
                 <Grid container className={classes.root} spacing={2}>
                     <Grid item xs={12}>
                         <Grid container justify="flex-start" spacing={9}>
                 {this.props.events.map(event =>
-                    <span key={event.id}>
-                        <Grid key={event.id} item className={classes.cardPadding}>
-                        <Card variant="outlined" className={classes.paper}>
+                    <span key={event.id} className={"spanClass"+event.id}>
+                        <Modal
+                            id={"modalId"+event.id}
+                            key={event.id}
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            className={classes.modal}
+                            open={this.state.openValue}
+                            onClose={this.handleClose}
+                            closeAfterTransition
+                            BackdropComponent={Backdrop}
+                            BackdropProps={{
+                                timeout: 500,
+                            }}
+                        >
+                            <Fade in={this.state.openValue}>
+                                <div id={"dataDivId"+event.id} className={classes.modalPaper}>
+                                    asdfasfsafsdfsd
+                                <h3>{event.event_name}</h3>
+                                    <p>{event.event_description}</p>
+                                    <MapBox event={event} />
+                                </div>
+                            </Fade>
+                        </Modal>
+                        <Grid item className={classes.cardPadding}>
+                        <Card variant="outlined" className={classes.Paper}>
                             <CardHeader
                                 avatar={
                                     <Avatar aria-label="recipe" className={classes.avatar}>
@@ -101,14 +168,26 @@ class NewEvent extends Component {
                                 component="img"
                                 className={classes.media}
                                 image={event.event_image}
+                                onClick={this.handleOpen}
+                                
                             />
+                                
                             <CardContent>
-                                <Typography variant="body2" color="textSecondary" component="p">
+                                {/* <Typography variant="body2" color="textSecondary" component="p">
                                     {event.event_description}
-                                </Typography>
+                                </Typography> */}
                                     {event.event_dancer_count > event.current_dancer_count &&
                                     <Button variant="contained" color="primary"
-                                    onClick={() => {this.joinEvent(event.id)}}>Join</Button> }
+                                    onClick={() => {this.joinEvent(event.id)}}>Join</Button> 
+                                    }
+                                    {event.event_dancer_count <= event.current_dancer_count &&
+                                        <Button variant="outlined" disabled>Its full !!!</Button>
+                                    }
+
+                                    {/* {event.event_dancer_count > event.current_dancer_count &&
+                                        <Button variant="contained" color="primary"
+                                            onClick={() => { this.joinEvent(event.id) }}>Join</Button>
+                                    } */}
                                     
                             </CardContent>
                             <CardActions>
@@ -126,6 +205,9 @@ class NewEvent extends Component {
                 </Grid>
                 {/* <MapBox />  */}
 
+                
+                
+
             </div>  
         )
     }
@@ -137,4 +219,4 @@ const putReduxStateOnProps = (reduxState) => ({
     user: reduxState.user
 })
 
-export default (withStyles(useStyles))(connect(putReduxStateOnProps)(NewEvent));
+export default (withStyles(useStyles))(withRouter(connect(putReduxStateOnProps)(NewEvent)));

@@ -1,15 +1,30 @@
-.event-name {
-    text-align: center;
-    padding: 20px;
 
-}
+/* .event-form {
+    background-color: skyblue;
+    width: 30%;
+    height: 250px;
+    margin: 450px auto;
+    padding: 25px;
+    border-radius: 2px; 
+     background-color: #e0dfcce5;
+    width: 900px;
+    height: 1000px;
+    margin: 200px auto; 
+    margin-bottom: 20px;
+    margin-top: 200px;
+    padding: 40px;
+    border-radius: 20px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+} */
 
-.post-event {
-    margin-left: 80px;
-    margin-top: 80px;
-    padding: 20px;
-}
-
-.add-event {
-    padding: 20px;
-}
+.home-image {
+    background-image: url("/images/pink_waves.jpg");
+    height: 2000px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 50px;
+    }

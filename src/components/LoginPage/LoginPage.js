@@ -54,7 +54,7 @@ class LoginPage extends Component {
                     </h2>
                 )} */}
                 <form className="login-form" onSubmit={this.login}>
-                    <h1 className="title">Login</h1>
+                    <h1 className="login-title">Login</h1>
                     <div>
                         <InputLabel htmlFor = "input-with-icon-adornment">Username</InputLabel>
                         <Input

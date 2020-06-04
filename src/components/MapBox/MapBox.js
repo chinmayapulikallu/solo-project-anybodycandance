@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
+import {useDispatch, useSelector} from 'react-redux';
 
-export default function MapBox() {
-    console.log(process.env.REACT_APP_MAPBOX_TOKEN)
+
+export default function MapBox({event}) {
+
+    let dispatch = useDispatch()
+    
+    let map = useSelector(state => state.mapReducer)
+
+    useEffect( () => {
+        dispatch({type: 'GET_COORDINATES', payload: event})
+    }, []) 
+
+
+    console.log("in Map box :: ", event, map)
     const [viewport, setViewport] = useState({
-        latitude: 44.986656,
-        longitude: -93.258133,
+        latitude: map.latitude,
+        longitude: map.longitude,
         zoom: 10,
         width: '50vw',
         height: '50vh'
@@ -19,15 +31,12 @@ export default function MapBox() {
             }}
         >
             <Marker
-                latitude={44.854300499999994}
-                longitude={-93.24217}>
+                latitude={map.latitude}
+                longitude={map.longitude}>
                 <div>
-                    <img src="marker.jpg" width="25px" height="25px" />
+                <img src="/images/marker.jpg" alt="marker" width="20px" height="20px" /> 
                 </div>
-
             </Marker>
-
-
         </ReactMapGL>
     </div>
 }

@@ -8,8 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import  './Dancers.css';
 
 const useStyles = (theme) => ({
@@ -68,10 +68,17 @@ class Dancers extends Component {
         this.props.dispatch({ type: 'GET_DANCERS' });
     }
 
+    //Goes back to home page after the admin views dancers list
+    handleHome = () => {
+        this.props.history.push('/home');
+    }
+
     render() {
         const { classes } = this.props;
         return (
             <div className="event-image">
+                <Button color="secondary" variant="contained"
+                        onClick={this.handleHome}>Home</Button>
                      <h1>Dancer List</h1>
                     <div>
                     <Table className={classes.table} aria-label="simple table">

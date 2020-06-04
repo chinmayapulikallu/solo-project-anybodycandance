@@ -89,6 +89,7 @@ class App extends Component {
               exact
               path="/edit/:id"
               component={UpdateEvent}
+              isAdminPage="true"
             />
             <ProtectedRoute
               exact

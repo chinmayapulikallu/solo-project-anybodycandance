@@ -9,7 +9,35 @@ function* eventSaga() {
     yield takeLatest('CREATE_EVENT', addEvent);
     yield takeLatest('UPDATE_EVENT', updateEvent);
     yield takeLatest('GET_MY_EVENT', fetchMyEvent);
+    yield takeLatest('GET_COORDINATES', fetchCoordinates);
+
 }
+
+
+function* fetchCoordinates(action) {
+    //move to function input event return endpoint
+    //const url = buildEndpoint(event)
+    const event = action.payload
+    const fullAddress = event.street+ " " + event.city+ " " + event.state+ " " + event.Zip
+    const endpoint = "https://api.mapbox.com/geocoding/v5/mapbox.places/" 
+                        + encodeURI(fullAddress)
+                        + ".json?access_token="
+                        + process.env.REACT_APP_MAPBOX_TOKEN
+    console.log("fetchCoordinates :: ", endpoint)
+    //https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiY2hpbm1heWFwdWxpa2FsbHUiLCJhIjoiY2thcmR6YjgzMDZrOTJycGpzajkycGx6YiJ9.Xb8SnTJKy_KcQUC9Gbl-ZA
+    try {
+        const response = yield axios.get(endpoint);
+        console.log(':::::::::', response.data)
+        const coordinatesResponse = response.data.features[0].geometry.coordinates
+        const coordinates = {latitude: coordinatesResponse[1],
+                             longitude: coordinatesResponse[0]}
+        console.log("mapbox response :: ", coordinates)
+        yield put({ type: 'SET_MAP', payload: coordinates })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 //axios to GET all events from server
 function* fetchEvents() {
@@ -31,7 +59,11 @@ function* addEvent(action) {
             event_date: action.payload.event_date,
             event_image: action.payload.event_image,
             event_dancer_count: action.payload.event_dancer_count,
-            event_description: action.payload.event_description
+            event_description: action.payload.event_description,
+            street: action.payload.street,
+            city: action.payload.city,
+            state: action.payload.state,
+            zip: action.payload.zip
         });
         yield put({ type: 'GET_EVENTS' })
     } catch (err) {

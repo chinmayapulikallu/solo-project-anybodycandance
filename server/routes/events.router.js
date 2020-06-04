@@ -44,10 +44,11 @@ const msg = {
  */
 router.post('/', rejectUnauthorized, (req, res) => {
     let query = `INSERT INTO event ("event_name", "event_location", "event_date", "event_image", 
-                 "event_dancer_count", "event_description",
-                 created_date) VALUES ($1, $2,$3, $4, $5, $6, now());`
+                 "event_dancer_count", "event_description", "street", "city", "state", "zip",
+                 created_date) VALUES ($1, $2,$3, $4, $5, $6, $7, $8, $9, $10, now());`
     let values = [req.body.event_name, req.body.event_location, req.body.event_date,
-                  req.body.event_image, req.body.event_dancer_count, req.body.event_description]
+                  req.body.event_image, req.body.event_dancer_count, req.body.event_description,
+                   req.body.street, req.body.city, req.body.state, req.body.zip]
     console.log(values)
     pool.query(query, values).then((result) => {
         res.sendStatus(200);

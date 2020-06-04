@@ -26,22 +26,9 @@ class RegisterPage extends Component {
                     password: this.state.password,
                 },
             });
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'You are logged in ',
-                showConfirmButton: false,
-                timer: 1000
-            })
             this.props.history.push('/newdancer')
         } else {
             this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: `${this.props.errors.registrationMessage}`,
-            })
-
         }
     } // end registerUser
 

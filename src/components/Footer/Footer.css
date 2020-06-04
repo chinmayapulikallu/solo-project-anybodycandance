@@ -1,9 +1,11 @@
 footer {
-    margin-top: 260px;
+    margin-top: 180px;
+    background-color: #A7412B; 
+    /* padding: 2%; */
   
 }
 
-#App-Footer {
+/* #App-Footer {
     padding: 1rem;
-  
-}
+   
+}  */
