@@ -33,11 +33,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const msg = {
     to: ['chaysam503@gmail.com', 'sushil.testuser@gmail.com'],
-    from: 'chinmayapulikallu@gmail.com',
+    from: process.env.SENDGRID_FROM_EMAIL,
     subject: 'Hello from SendGrid',
     text: 'New Event!!!!!!!',
-    html: '<strong>Hello, A new event is posted. Login and check for more details localhost:3000  </strong>'
+    html: '<strong>Hello, A new event is posted. Login and check for more details <a href="http://localhost:3000/#/home">Any Body Can Dance</a>  </strong>'
 };
+
+// const hasEnvVariables = 
+//     process.env.SENDGRID_API_KEY && process.env.SENDGRID_FROM_EMAIL;
+// if (req.user && req.user.email && hasEnvVariables) {
+//     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+//     const msg = {
+//         to: req.user.email,
+//         from: process.env.SENDGRID_FROM_EMAIL,
+//         subject: "Boredgamr Event",
+//         text: "and easy to do anywhere, even with Node.js",
+//         html: "<strong>and easy to do anywhere, even with Node.js</strong>",
+//     };
+
 
 /**
  * Add an event by admin 

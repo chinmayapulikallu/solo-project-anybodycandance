@@ -56,6 +56,7 @@ const useStyles = (theme) => ({
         justifyContent: 'center',
     },
     modalPaper: {
+        maxWidth: "70%",
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
@@ -68,10 +69,10 @@ const useStyles = (theme) => ({
 
 class NewEvent extends Component {
     state = {
-        openValue: false
+        openValue: false,
+        currentEvent: {},
     };
     
-
     componentDidMount() {
         this.getEvents();
     }
@@ -82,15 +83,13 @@ class NewEvent extends Component {
     }
 
     //modal function to display when clicked on image
-    handleOpen = () => {
-        // document.getElementById('dataDivId44').innerHTML = "jjjjjjjjjjj"
-        
+    handleOpen = (event, classes) => {
+        console.log("in handleOpen :: ", event, classes)
         this.setState({
+            ...this.state,
+            currentEvent: event,
             openValue: true,
         });
-        console.log("handleOpen :: ", document.getElementById('dataDivId44'))
-        // openVal = true
-        // setOpenVal(true);
     };
 
     //closes modal on click
@@ -99,7 +98,6 @@ class NewEvent extends Component {
            openValue: false,
        });
     };
-
 
     //allows user to view events under his account
     handleMyEvents = () => {
@@ -114,42 +112,23 @@ class NewEvent extends Component {
                                                           event_id: id}})    
     }
 
+
     render() { 
         const { classes } = this.props;
         const openVal = false
         const setOpenVal = {}
+        
         return(
             <div className="new-event-image">
-                <Button variant="contained" color="primary"
-                onClick={this.handleMyEvents}>My Events</Button>
+                <span className="float-right">
+                    <Button variant="contained" color="primary" size="large"
+                    onClick={this.handleMyEvents}>My Events</Button>
+                </span>
                 <Grid container className={classes.root} spacing={2}>
                     <Grid item xs={12}>
                         <Grid container justify="flex-start" spacing={9}>
                 {this.props.events.map(event =>
                     <span key={event.id} className={"spanClass"+event.id}>
-                        <Modal
-                            id={"modalId"+event.id}
-                            key={event.id}
-                            aria-labelledby="transition-modal-title"
-                            aria-describedby="transition-modal-description"
-                            className={classes.modal}
-                            open={this.state.openValue}
-                            onClose={this.handleClose}
-                            closeAfterTransition
-                            BackdropComponent={Backdrop}
-                            BackdropProps={{
-                                timeout: 500,
-                            }}
-                        >
-                            <Fade in={this.state.openValue}>
-                                <div id={"dataDivId"+event.id} className={classes.modalPaper}>
-                                    asdfasfsafsdfsd
-                                <h3>{event.event_name}</h3>
-                                    <p>{event.event_description}</p>
-                                    <MapBox event={event} />
-                                </div>
-                            </Fade>
-                        </Modal>
                         <Grid item className={classes.cardPadding}>
                         <Card variant="outlined" className={classes.Paper}>
                             <CardHeader
@@ -168,26 +147,28 @@ class NewEvent extends Component {
                                 component="img"
                                 className={classes.media}
                                 image={event.event_image}
-                                onClick={this.handleOpen}
+                                onClick={() => {this.handleOpen(event, classes)}}
                                 
                             />
                                 
-                            <CardContent>
+                            <CardContent className="align-center">
                                 {/* <Typography variant="body2" color="textSecondary" component="p">
                                     {event.event_description}
                                 </Typography> */}
-                                    {event.event_dancer_count > event.current_dancer_count &&
-                                    <Button variant="contained" color="primary"
-                                    onClick={() => {this.joinEvent(event.id)}}>Join</Button> 
-                                    }
-                                    {event.event_dancer_count <= event.current_dancer_count &&
-                                        <Button variant="outlined" disabled>Its full !!!</Button>
-                                    }
-
-                                    {/* {event.event_dancer_count > event.current_dancer_count &&
+                                    <span>
+                                        {event.event_dancer_count > event.current_dancer_count &&
                                         <Button variant="contained" color="primary"
-                                            onClick={() => { this.joinEvent(event.id) }}>Join</Button>
-                                    } */}
+                                        onClick={() => {this.joinEvent(event.id)}}>Join</Button> 
+                                        }
+                                        {event.event_dancer_count <= event.current_dancer_count &&
+                                            <Button variant="outlined" disabled>Its full !!!</Button>
+                                        }
+
+                                        {/* {event.event_dancer_count > event.current_dancer_count &&
+                                            <Button variant="contained" color="primary"
+                                                onClick={() => { this.joinEvent(event.id) }}>Join</Button>
+                                        } */}
+                                    </span>
                                     
                             </CardContent>
                             <CardActions>
@@ -204,9 +185,26 @@ class NewEvent extends Component {
 
                 </Grid>
                 {/* <MapBox />  */}
-
-                
-                
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={this.state.openValue}
+                    onClose={this.handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={this.state.openValue}>
+                        <div className={classes.modalPaper}>
+                            <h3>{this.state.currentEvent.event_name}</h3>
+                            <p>{this.state.currentEvent.event_description}</p>
+                            <MapBox event={this.state.currentEvent} />
+                        </div>
+                    </Fade>
+                </Modal>
 
             </div>  
         )

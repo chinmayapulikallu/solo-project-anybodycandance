@@ -8,3 +8,12 @@
     background-size: cover;
     padding-top: 50px;
     }
+
+.align-center {
+    text-align: center;
+}
+
+.float-right {
+    float: right;
+    margin-right:50px;
+}

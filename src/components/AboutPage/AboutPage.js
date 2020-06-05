@@ -9,7 +9,8 @@ import './AboutPage.css';
 const AboutPage = () => (
     <div className="about-image">
         <div>
-            <h2 className="about-title">Any Body Can Dance is a dance app for dancers.</h2>
+            <h3 className="about-title">Forget your troubles and dance, 
+            because dance isn't just dance its Magical, something that sets you free. </h3>
         </div>
     </div>
 )

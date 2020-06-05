@@ -15,7 +15,7 @@ import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Button from '@material-ui/core/Button';
-
+import './MyEvents.css';
 
 
 const useStyles = (theme) => ({
@@ -76,8 +76,8 @@ class MyEvents extends Component {
                 
                 <div className="new-event-image">
                     <Button variant="contained" color="secondary"
-                        onClick={this.handleHome}>My Events</Button>
-                    <h2>My Events</h2>
+                        onClick={this.handleHome}>Back Home</Button>
+                    <h2 className="my-title">My Events</h2>
                     <Grid container className={classes.root} spacing={2}>
                         <Grid item xs={12}>
                             <Grid container justify="flex-start" spacing={9}>

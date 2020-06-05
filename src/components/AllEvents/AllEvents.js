@@ -21,6 +21,8 @@ import {
 } from '@material-ui/pickers';
 import Button from '@material-ui/core/Button';
 import './AllEvents.css';
+import Swal from 'sweetalert2'; 
+
 
 
 
@@ -92,9 +94,69 @@ class AllEvents extends Component {
     //If an event is cancelled this function dispatches the event id 
     // and deletes the event from database
     deleteEvent = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#dd3',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire({
+                    text: 'Deleted!',
+                    width: 100,
+                    padding: '1em',
+                    background: '#fff url()',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
         console.log('in delete event', id);
         this.props.dispatch({type: 'DELETE_EVENT', payload: id})
-    }
+            }
+        })
+
+    } 
+
+    // deleteEvent = (id) => {
+    //       Swal.fire({
+    //                 text: 'Deleted!',
+    //                 width: 100,
+    //                 padding: '1em',
+    //                 background: '#fff url()',
+    //                 showConfirmButton: false,
+    //                 timer: 1500,
+    //             })
+    //     console.log('in delete event', id);
+    //     this.props.dispatch({type: 'DELETE_EVENT', payload: id})
+        
+    // }
+
+    // Swal = () => {
+    //     Swal.fire({
+    //         title: 'Are you sure?',
+    //         text: "You won't be able to revert this!",
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#3085d6',
+    //         cancelButtonColor: '#dd3',
+    //         confirmButtonText: 'Yes!'
+    //     }). then (result => {
+    //         if(result.value) {
+    //             Swal.fire({
+    //                 text: 'Deleted!',
+    //                 width: 100,
+    //                 padding: '1em',
+    //                 background: '#fff url()',
+    //                 showConfirmButton: false,
+    //                 timer: 1500,
+    //             })
+    //             this.deleteEvent();
+    //         }
+    //     })
+
+    // }
 
 
 
@@ -105,9 +167,6 @@ class AllEvents extends Component {
     }
 
 
-    // handleBack = () => {
-    //     this.props.history.push('/home');
-    // }
 
     render() {
         const { classes } = this.props;

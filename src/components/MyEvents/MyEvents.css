@@ -7,3 +7,11 @@
     background-size: cover;
     padding-top: 50px;
     }
+
+.my-title {
+    text-align: center;
+    color: #A7412B;
+    margin: 3%;
+    padding: 2%;
+    font-size: 30px;
+}
