@@ -218,6 +218,7 @@ class CreateEvent extends Component {
                     multiline
                     rows={6}
                     variant="outlined"
+                    onChange={(event) => this.handleChange('event_description', event)}
                 />
                 <Button variant="contained" color="primary"
                    onClick={this.addEvent}>Create Event</Button>

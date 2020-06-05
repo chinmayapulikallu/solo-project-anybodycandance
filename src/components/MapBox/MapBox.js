@@ -34,7 +34,7 @@ export default function MapBox({event}) {
                 latitude={map.latitude}
                 longitude={map.longitude}>
                 <div>
-                <img src="/images/marker.jpg" alt="marker" width="20px" height="20px" /> 
+                <img src="/images/marker.jpg" alt="marker" width="50" height="50" /> 
                 </div>
             </Marker>
         </ReactMapGL>

@@ -48,7 +48,8 @@ class UpdateEvent extends Component {
         id: '',
         event_name: '',
         event_location: '',
-        event_date: new Date()
+        event_date: new Date(),
+        event_description: ''
     }
 
     componentDidMount() {
@@ -60,7 +61,8 @@ class UpdateEvent extends Component {
             id: currentEvent.id,
             event_name: currentEvent.event_name,
             event_location: currentEvent.event_location,
-            event_date: currentEvent.event_date
+            event_date: currentEvent.event_date,
+            event_description: currentEvent.event_description
         })
     }
  
@@ -101,15 +103,23 @@ class UpdateEvent extends Component {
                 <div className="edit-heading">
                    <h2>Update Event</h2> 
                 </div>
+                {/* <input type="text" value= {this.state.event_name} 
+                onChange={(event) => this.handleChange('event_name', event)} />
+                <input type="text" value={this.state.event_location}
+                    onChange={(event) => this.handleChange('event_location', event)} />
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <DateTimePicker  value={this.state.event_date}
+                                    onChange={this.handleDateChange} />
+                 </MuiPickersUtilsProvider>
+                 <input type="text" value= {this.state.event_description} 
+                onChange={(event) => this.handleChange('event_description', event)} /> */}
+
+
                 <TextField
                     label="Event Name"
                     id="outlined-start-adornment"
                     className={clsx(classes.margin, classes.textField)}
-                    InputProps={{
-                        startAdornment: <InputAdornment position="start">
-                            {this.state.event_name} 
-                        </InputAdornment>,
-                    }}
+                    value={this.state.event_name}
                     variant="outlined"
                     onChange={(event) => this.handleChange('event_name', event)}
                 />
@@ -117,13 +127,9 @@ class UpdateEvent extends Component {
                     label="Event Location"
                     id="outlined-start-adornment"
                     className={clsx(classes.margin, classes.textField)}
-                    InputProps={{
-                        startAdornment: <InputAdornment position="start">
-                            {this.state.event_location}
-                        </InputAdornment>,
-                    }}
+                    value={this.state.event_location}
                     variant="outlined"
-                    onChange={(event) => this.handleChange('event_name', event)}
+                    onChange={(event) => this.handleChange('event_location', event)}
                 />
                 <TextField
                     label="Event Date & Time"
@@ -138,7 +144,7 @@ class UpdateEvent extends Component {
                         </InputAdornment>,
                     }}
                     variant="outlined"
-                    onChange={(event) => this.handleChange('event_name', event)}
+                    // onChange={(event) => this.handleChange('event_name', event)}
                 />
                 <div>
                     <div className="edit-link">

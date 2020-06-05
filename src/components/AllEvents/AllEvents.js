@@ -23,10 +23,10 @@ import Button from '@material-ui/core/Button';
 import './AllEvents.css';
 import Swal from 'sweetalert2'; 
 //modal
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import MapBox from '../MapBox/MapBox';
+// import Modal from '@material-ui/core/Modal';
+// import Backdrop from '@material-ui/core/Backdrop';
+// import Fade from '@material-ui/core/Fade';
+// import MapBox from '../MapBox/MapBox';
 
 
 
@@ -42,18 +42,18 @@ const useStyles = (theme) => ({
         fontSize: 30,
         borderBottom: "0px"
     },
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    modalPaper: {
-        maxWidth: "70%",
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-    }
+    // modal: {
+    //     display: 'flex',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    // },
+    // modalPaper: {
+    //     maxWidth: "70%",
+    //     backgroundColor: theme.palette.background.paper,
+    //     border: '2px solid #000',
+    //     boxShadow: theme.shadows[5],
+    //     padding: theme.spacing(2, 4, 3),
+    // }
     // head: {
     //     backgroundColor: theme.palette.common.black,
     //     color: theme.palette.common.white,
@@ -81,10 +81,10 @@ const StyledTableRow = withStyles((theme) => ({
 
 class AllEvents extends Component {
 
-    state = {
-        openValue: false,
-        currentEvent: {},
-    };
+    // state = {
+    //     openValue: false,
+    //     currentEvent: {},
+    // };
 
     componentDidMount() {
         this.getEvents();
@@ -101,12 +101,12 @@ class AllEvents extends Component {
         });
     };
 
-    //closes modal on click
-    handleClose = () => {
-        this.setState({
-            openValue: false,
-        });
-    };
+    // //closes modal on click
+    // handleClose = () => {
+    //     this.setState({
+    //         openValue: false,
+    //     });
+    // };
 
     //On click renders create event page
     createEvent = () => {
@@ -149,28 +149,15 @@ class AllEvents extends Component {
                     padding: '1em',
                     background: '#fff url()',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1000
                 })
         console.log('in delete event', id);
         this.props.dispatch({type: 'DELETE_EVENT', payload: id})
             }
         })
-
     } 
 
-    // deleteEvent = (id) => {
-    //       Swal.fire({
-    //                 text: 'Deleted!',
-    //                 width: 100,
-    //                 padding: '1em',
-    //                 background: '#fff url()',
-    //                 showConfirmButton: false,
-    //                 timer: 1500,
-    //             })
-    //     console.log('in delete event', id);
-    //     this.props.dispatch({type: 'DELETE_EVENT', payload: id})
-        
-    // }
+    
 
 
 
@@ -227,7 +214,7 @@ class AllEvents extends Component {
                         )}
                     </TableBody>
                 </Table>
-                <Modal
+                {/* <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
                     className={classes.modal}
@@ -246,7 +233,7 @@ class AllEvents extends Component {
                             <MapBox event={this.state.currentEvent} />
                         </div>
                     </Fade>
-                </Modal>
+                </Modal> */}
 
                 <br />
                 <br />

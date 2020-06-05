@@ -19,6 +19,14 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import MapBox from '../MapBox/MapBox';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+
+    DateTimePicker,
+    // TimePicker
+} from '@material-ui/pickers';
 
 
 const useStyles = (theme) => ({
@@ -43,6 +51,13 @@ const useStyles = (theme) => ({
     paper: {
         height: 500,
         width: 300,
+
+        backgroundImage: 'url("/images/blue_waves.jpg")',
+        // background-attachment: fixed;
+        // background-position: center;
+        // background-repeat: no-repeat;
+        // background-size: cover;
+        // padding-top: 50px;
     },
     control: {
         padding: theme.spacing(2),
@@ -62,7 +77,11 @@ const useStyles = (theme) => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
-
+    dateField: {
+        pointerEvents: "none",
+        fontSize: 30,
+        borderBottom: "0px"
+    }
 });
 
 
@@ -156,6 +175,13 @@ class NewEvent extends Component {
                                     {event.event_description}
                                 </Typography> */}
                                     <span>
+                                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                            <DateTimePicker className={classes.dateField} value={event.event_date} />
+                                        </MuiPickersUtilsProvider>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        
                                         {event.event_dancer_count > event.current_dancer_count &&
                                         <Button variant="contained" color="primary"
                                         onClick={() => {this.joinEvent(event.id)}}>Join</Button> 

@@ -56,6 +56,7 @@ const msg = {
  * Add an event by admin 
  */
 router.post('/', rejectUnauthorized, (req, res) => {
+    console.log()
     let query = `INSERT INTO event ("event_name", "event_location", "event_date", "event_image", 
                  "event_dancer_count", "event_description", "street", "city", "state", "zip",
                  created_date) VALUES ($1, $2,$3, $4, $5, $6, $7, $8, $9, $10, now());`
