@@ -22,6 +22,11 @@ import {
 import Button from '@material-ui/core/Button';
 import './AllEvents.css';
 import Swal from 'sweetalert2'; 
+//modal
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import MapBox from '../MapBox/MapBox';
 
 
 
@@ -36,11 +41,24 @@ const useStyles = (theme) => ({
         pointerEvents: "none",
         fontSize: 30,
         borderBottom: "0px"
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalPaper: {
+        maxWidth: "70%",
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
     }
     // head: {
     //     backgroundColor: theme.palette.common.black,
     //     color: theme.palette.common.white,
     // }
+
 });
 
 const StyledTableCell = withStyles((theme) => ({
@@ -63,11 +81,32 @@ const StyledTableRow = withStyles((theme) => ({
 
 class AllEvents extends Component {
 
+    state = {
+        openValue: false,
+        currentEvent: {},
+    };
 
     componentDidMount() {
         this.getEvents();
     }
 
+
+    //modal function to display when clicked on image
+    handleOpen = (event, classes) => {
+        console.log("in handleOpen :: ", event, classes)
+        this.setState({
+            ...this.state,
+            currentEvent: event,
+            openValue: true,
+        });
+    };
+
+    //closes modal on click
+    handleClose = () => {
+        this.setState({
+            openValue: false,
+        });
+    };
 
     //On click renders create event page
     createEvent = () => {
@@ -133,30 +172,6 @@ class AllEvents extends Component {
         
     // }
 
-    // Swal = () => {
-    //     Swal.fire({
-    //         title: 'Are you sure?',
-    //         text: "You won't be able to revert this!",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#dd3',
-    //         confirmButtonText: 'Yes!'
-    //     }). then (result => {
-    //         if(result.value) {
-    //             Swal.fire({
-    //                 text: 'Deleted!',
-    //                 width: 100,
-    //                 padding: '1em',
-    //                 background: '#fff url()',
-    //                 showConfirmButton: false,
-    //                 timer: 1500,
-    //             })
-    //             this.deleteEvent();
-    //         }
-    //     })
-
-    // }
 
 
 
@@ -170,6 +185,8 @@ class AllEvents extends Component {
 
     render() {
         const { classes } = this.props;
+        const openVal = false
+        const setOpenVal = {}
         console.log("upcoming this.props :: ", this.props)
         return (
             <div className="event-image">
@@ -194,7 +211,8 @@ class AllEvents extends Component {
                     <TableBody>
                         {this.props.events.map(event => 
                         <StyledTableRow key={event.id}>
-                            <StyledTableCell>{event.event_name}</StyledTableCell>
+                                <StyledTableCell onClick={() => { this.handleOpen(event, classes) }}>
+                                    {event.event_name}</StyledTableCell>
                             <StyledTableCell>{event.event_location}</StyledTableCell>
                             <StyledTableCell>
                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -209,6 +227,27 @@ class AllEvents extends Component {
                         )}
                     </TableBody>
                 </Table>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={this.state.openValue}
+                    onClose={this.handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={this.state.openValue}>
+                        <div className={classes.modalPaper}>
+                            <h3>{this.state.currentEvent.event_name}</h3>
+                            <p>{this.state.currentEvent.event_description}</p>
+                            <MapBox event={this.state.currentEvent} />
+                        </div>
+                    </Fade>
+                </Modal>
+
                 <br />
                 <br />
                 <br />

@@ -16,6 +16,12 @@ import Grid from '@material-ui/core/Grid';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Button from '@material-ui/core/Button';
 import './MyEvents.css';
+//modal
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import MapBox from '../MapBox/MapBox';
+
 
 
 const useStyles = (theme) => ({
@@ -46,6 +52,18 @@ const useStyles = (theme) => ({
     },
     cardPadding: {
         padding: 30
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalPaper: {
+        maxWidth: "70%",
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
     }
 
 });
@@ -53,6 +71,10 @@ const useStyles = (theme) => ({
 
 class MyEvents extends Component {
 
+    state = {
+        openValue: false,
+        currentEvent: {},
+    };
 
     componentDidMount() {
         this.getEvents();
@@ -69,8 +91,27 @@ class MyEvents extends Component {
         this.props.history.push('/home');
     }
 
+    //modal function to display when clicked on image
+    handleOpen = (event, classes) => {
+        console.log("in handleOpen :: ", event, classes)
+        this.setState({
+            ...this.state,
+            currentEvent: event,
+            openValue: true,
+        });
+    };
+
+    //closes modal on click
+    handleClose = () => {
+        this.setState({
+            openValue: false,
+        });
+    };
+
     render() {
         const { classes } = this.props;  
+         const openVal = false
+        const setOpenVal = {}
         return (
             <div>
                 
@@ -101,6 +142,7 @@ class MyEvents extends Component {
                                                     component="img"
                                                     className={classes.media}
                                                     image={event.event_image}
+                                                    onClick={() => { this.handleOpen(event, classes) }}
                                                 />
                                                 <CardContent>
                                                     {/* <Typography variant="body2" color="textSecondary" component="p">
@@ -124,7 +166,27 @@ class MyEvents extends Component {
                         </Grid>
 
                     </Grid>
-                </div>                
+                </div> 
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={this.state.openValue}
+                    onClose={this.handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={this.state.openValue}>
+                        <div className={classes.modalPaper}>
+                            <h3>{this.state.currentEvent.event_name}</h3>
+                            <p>{this.state.currentEvent.event_description}</p>
+                            <MapBox event={this.state.currentEvent} />
+                        </div>
+                    </Fade>
+                </Modal>               
             </div>
         )
     }
