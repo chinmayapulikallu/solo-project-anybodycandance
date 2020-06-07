@@ -68,17 +68,17 @@ class Dancers extends Component {
         this.props.dispatch({ type: 'GET_DANCERS' });
     }
 
-    //Goes back to home page after the admin views dancers list
-    handleHome = () => {
-        this.props.history.push('/home');
-    }
+    // //Goes back to home page after the admin views dancers list
+    // handleHome = () => {
+    //     this.props.history.push('/home');
+    // }
 
     render() {
         const { classes } = this.props;
         return (
             <div className="event-image">
-                <Button color="secondary" variant="contained"
-                        onClick={this.handleHome}>Home</Button>
+                {/* <Button color="secondary" variant="contained"
+                        onClick={this.handleHome}>Home</Button> */}
                      <h1>Dancer List</h1>
                     <div>
                     <Table className={classes.table} aria-label="simple table">

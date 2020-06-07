@@ -39,6 +39,10 @@ const useStyles = (theme) => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
+    buttonMargin: {
+        margin: 15
+    },
+
 });
 
 
@@ -101,20 +105,9 @@ class UpdateEvent extends Component {
         return (
             <div className="edit-event">
                 <div className="edit-heading">
-                   <h2>Update Event</h2> 
+                   <h1>Update Event</h1> 
                 </div>
-                {/* <input type="text" value= {this.state.event_name} 
-                onChange={(event) => this.handleChange('event_name', event)} />
-                <input type="text" value={this.state.event_location}
-                    onChange={(event) => this.handleChange('event_location', event)} />
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <DateTimePicker  value={this.state.event_date}
-                                    onChange={this.handleDateChange} />
-                 </MuiPickersUtilsProvider>
-                 <input type="text" value= {this.state.event_description} 
-                onChange={(event) => this.handleChange('event_description', event)} /> */}
-
-
+                <div className="center-container">
                 <TextField
                     label="Event Name"
                     id="outlined-start-adornment"
@@ -146,11 +139,12 @@ class UpdateEvent extends Component {
                     variant="outlined"
                     // onChange={(event) => this.handleChange('event_name', event)}
                 />
+                </div>
                 <div>
                     <div className="edit-link">
-                        <Button variant="contained" color="primary"
+                        <Button variant="contained" color="primary" className={classes.buttonMargin}
                         onClick={this.updateEvent}>Save Update</Button>
-                        <Button variant="contained" color="secondary"
+                        <Button variant="contained" color="secondary" className={classes.buttonMargin}
                         onClick={this.handleGoBack}>Go Back</Button>
                     </div>                
                 </div>

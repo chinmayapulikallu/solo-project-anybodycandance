@@ -141,10 +141,11 @@ class NewEvent extends Component {
         
         return(
             <div className="new-event-image">
-                <span className="float-right">
+                <span className="new-event-button">
                     <Button variant="contained" color="primary" size="large"
                     onClick={this.handleMyEvents}>My Events</Button>
                 </span>
+                <h2 className="my-title">Upcoming Events!!!</h2>
                 <Grid container className={classes.root} spacing={2}>
                     <Grid item xs={12}>
                         <Grid container justify="flex-start" spacing={9}>
@@ -187,7 +188,7 @@ class NewEvent extends Component {
                                         {event.event_dancer_count > event.current_dancer_count &&
                                         <Button variant="contained" color="primary"
                                         onClick={() => {this.joinEvent(event.id)}}>Join</Button> 
-                                        }
+                                        } 
                                         {event.event_dancer_count <= event.current_dancer_count &&
                                             <Button variant="outlined" disabled>Its full !!!</Button>
                                         }

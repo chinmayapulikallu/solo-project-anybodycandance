@@ -30,7 +30,7 @@ class UserPage extends Component {
             <div className="user-image">
             <div>
                 <h1 id="welcome">
-                    Welcome, {this.props.user.username}!
+                    Welcome {this.props.user.username}!
                 </h1>
             </div>
             <div>

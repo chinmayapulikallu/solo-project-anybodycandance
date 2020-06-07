@@ -21,6 +21,14 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import MapBox from '../MapBox/MapBox';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+
+    DateTimePicker,
+    // TimePicker
+} from '@material-ui/pickers';
 
 
 
@@ -80,6 +88,7 @@ class MyEvents extends Component {
         this.getEvents();
     }
 
+
     //get function to dispatch when the page loads
     //and get events the dancer is part of
     getEvents = () => {
@@ -108,6 +117,16 @@ class MyEvents extends Component {
         });
     };
 
+    //If a user is not interested in event on click will remove the event from page
+    unJoinEvent = (id) => {
+        this.props.dispatch({
+            type: 'UNJOIN_EVENT', payload: {
+                user_id: this.props.user.id,
+                event_id: id
+            }
+        })
+    }
+
     render() {
         const { classes } = this.props;  
          const openVal = false
@@ -116,8 +135,10 @@ class MyEvents extends Component {
             <div>
                 
                 <div className="new-event-image">
-                    <Button variant="contained" color="secondary"
-                        onClick={this.handleHome}>Back Home</Button>
+                    <span className="my-event-button">
+                    <Button variant="contained" color="primary"
+                        onClick={this.handleHome}> Back </Button>
+                    </span>
                     <h2 className="my-title">My Events</h2>
                     <Grid container className={classes.root} spacing={2}>
                         <Grid item xs={12}>
@@ -144,14 +165,21 @@ class MyEvents extends Component {
                                                     image={event.event_image}
                                                     onClick={() => { this.handleOpen(event, classes) }}
                                                 />
-                                                <CardContent>
+                                                <CardContent className="align-center">
                                                     {/* <Typography variant="body2" color="textSecondary" component="p">
                                                         {event.event_description}
                                                     </Typography> */}
                                                     {/* {event.event_dancer_count > event.current_dancer_count &&
                                                         <Button variant="contained" color="primary"
                                                             onClick={() => { this.joinEvent(event.id) }}>Join</Button>} */}
-
+                                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                        <DateTimePicker className={classes.dateField} value={event.event_date} />
+                                                 </MuiPickersUtilsProvider>
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <Button variant="contained" color="secondary"
+                                                        onClick={() => { this.unJoinEvent(event.id) }}>Unjoin</Button>
                                                 </CardContent>
                                                 <CardActions>
 

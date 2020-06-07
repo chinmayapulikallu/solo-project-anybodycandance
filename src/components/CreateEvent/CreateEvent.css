@@ -19,6 +19,12 @@
     align-items: center;
 } */
 
+.center-container {
+    flex-direction: column;
+    align-items: center;
+    display: flex; 
+}
+
 .home-image {
     background-image: url("/images/pink_waves.jpg");
     height: 2000px;
@@ -28,3 +34,7 @@
     background-size: cover;
     padding-top: 50px;
     }
+
+.create-event {
+   text-align: center;
+}

@@ -1,11 +1,15 @@
 footer {
-    margin-top: 180px;
+    /* margin-top: 180px; */
     background-color: #A7412B; 
-    /* padding: 2%; */
+    text-align: center;
+    /* padding: 2%;  */
+    padding: 1rem;
   
 }
 
 /* #App-Footer {
     padding: 1rem;
+    background-color: #A7412B; 
+    text-align: center;
    
 }  */

@@ -1,6 +1,11 @@
 .edit-event {
-    margin: 80px;
-    padding: 20px;
+    background-image: url("/images/pink_waves.jpg");
+    height: 2000px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 50px;
 }
 
 .edit-heading {
@@ -8,6 +13,22 @@
 }
 
 .edit-link {
-    margin: 20px;
-    padding: 10px;
+     text-align: center;
+     margin: 15px;
 }
+
+.center-container {
+    flex-direction: column;
+    align-items: center;
+    display: flex; 
+}
+
+.home-image {
+    background-image: url("/images/pink_waves.jpg");
+    height: 2000px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 50px;
+    }

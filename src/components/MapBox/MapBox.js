@@ -18,6 +18,8 @@ export default function MapBox({event}) {
     const [viewport, setViewport] = useState({
         latitude: map.latitude,
         longitude: map.longitude,
+        // latitude: 44.9778,
+        // longitude: -93.2650,
         zoom: 10,
         width: '50vw',
         height: '50vh'

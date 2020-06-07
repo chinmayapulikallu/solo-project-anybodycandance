@@ -22,11 +22,12 @@ import {
 import Button from '@material-ui/core/Button';
 import './AllEvents.css';
 import Swal from 'sweetalert2'; 
+import './AllEvents.css';
 //modal
-// import Modal from '@material-ui/core/Modal';
-// import Backdrop from '@material-ui/core/Backdrop';
-// import Fade from '@material-ui/core/Fade';
-// import MapBox from '../MapBox/MapBox';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import MapBox from '../MapBox/MapBox';
 
 
 
@@ -42,22 +43,25 @@ const useStyles = (theme) => ({
         fontSize: 30,
         borderBottom: "0px"
     },
-    // modal: {
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    // },
-    // modalPaper: {
-    //     maxWidth: "70%",
-    //     backgroundColor: theme.palette.background.paper,
-    //     border: '2px solid #000',
-    //     boxShadow: theme.shadows[5],
-    //     padding: theme.spacing(2, 4, 3),
-    // }
-    // head: {
-    //     backgroundColor: theme.palette.common.black,
-    //     color: theme.palette.common.white,
-    // }
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalPaper: {
+        maxWidth: "70%",
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+    head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    buttonMargin: {
+        margin: 15
+    }
 
 });
 
@@ -81,10 +85,10 @@ const StyledTableRow = withStyles((theme) => ({
 
 class AllEvents extends Component {
 
-    // state = {
-    //     openValue: false,
-    //     currentEvent: {},
-    // };
+    state = {
+        openValue: false,
+        currentEvent: {},
+    };
 
     componentDidMount() {
         this.getEvents();
@@ -101,12 +105,12 @@ class AllEvents extends Component {
         });
     };
 
-    // //closes modal on click
-    // handleClose = () => {
-    //     this.setState({
-    //         openValue: false,
-    //     });
-    // };
+    //closes modal on click
+    handleClose = () => {
+        this.setState({
+            openValue: false,
+        });
+    };
 
     //On click renders create event page
     createEvent = () => {
@@ -157,7 +161,12 @@ class AllEvents extends Component {
         })
     } 
 
-    
+    highlightEvent = (event) => {
+        let beforeDate = new Date();
+        beforeDate.setDate( beforeDate.getDate() - 2 )
+        return (new Date(event.created_date) < beforeDate)
+             && (event.event_dancer_count != event.current_dancer_count)
+    }
 
 
 
@@ -177,10 +186,16 @@ class AllEvents extends Component {
         console.log("upcoming this.props :: ", this.props)
         return (
             <div className="event-image">
-                <Button variant="contained" color="primary"
+                <span className="float-right">
+                    {/* <span className="create-button-wrapper"> */}
+                <Button variant="contained" color="primary" className={classes.buttonMargin}
                     onClick={() => this.createEvent()}>Create Event</Button>
-                <Button variant="contained" color="primary"
+                    {/* </span> */}
+                    {/* <span className="create-button-wrapper"> */}
+                <Button variant="contained" color="primary" className={classes.buttonMargin}
                     onClick={() => this.viewDancers()}>View Dancers</Button>
+                    {/* </span> */}
+                </span>
 
                 <div>
                     <h2 className="event-title">Events List</h2>
@@ -190,31 +205,37 @@ class AllEvents extends Component {
                         <StyledTableRow>
                             <StyledTableCell>Event Name</StyledTableCell>
                             <StyledTableCell>Location</StyledTableCell>
-                            <StyledTableCell>Date & time</StyledTableCell>                 
+                            <StyledTableCell>Date & time</StyledTableCell>
+                            <StyledTableCell>Allowed Dancers</StyledTableCell>
+                            <StyledTableCell>Enrolled Dancers</StyledTableCell>               
                             <StyledTableCell>Delete</StyledTableCell>
                             <StyledTableCell>Edit</StyledTableCell>
                         </StyledTableRow>
                     </TableHead>
                     <TableBody>
-                        {this.props.events.map(event => 
-                        <StyledTableRow key={event.id}>
+                        {this.props.events.map(event =>
+                        //(event.event_dancer_count < event.current_dancer_count) &&
+                            <StyledTableRow key={event.id} 
+                                className={this.highlightEvent(event) ? "row-highlight":""}>
                                 <StyledTableCell onClick={() => { this.handleOpen(event, classes) }}>
                                     {event.event_name}</StyledTableCell>
-                            <StyledTableCell>{event.event_location}</StyledTableCell>
-                            <StyledTableCell>
+                                <StyledTableCell>{event.event_location}</StyledTableCell>
+                                <StyledTableCell>
                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                         <DateTimePicker className={classes.dateField} value={event.event_date}/>
                                     </MuiPickersUtilsProvider>
-                            </StyledTableCell> 
-                                <TableCell align="left"><IconButton aria-label="delete" onClick={() => this.deleteEvent(event.id)}>
-                                    <DeleteIcon fontSize="large"/></IconButton></TableCell>
-                                    <TableCell  align="left"><IconButton aria-label="delete" onClick={() => this.updateEvent(event.id)}>
-                                    <EditIcon fontSize="large"/></IconButton></TableCell>                        
-                        </StyledTableRow>
+                                </StyledTableCell>
+                                <StyledTableCell>{event.event_dancer_count}</StyledTableCell>
+                                <StyledTableCell>{event.current_dancer_count}</StyledTableCell>
+                                    <TableCell align="left"><IconButton aria-label="delete" onClick={() => this.deleteEvent(event.id)}>
+                                        <DeleteIcon fontSize="large"/></IconButton></TableCell>
+                                        <TableCell  align="left"><IconButton aria-label="delete" onClick={() => this.updateEvent(event.id)}>
+                                        <EditIcon fontSize="large"/></IconButton></TableCell>                        
+                            </StyledTableRow>
                         )}
                     </TableBody>
                 </Table>
-                {/* <Modal
+                <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
                     className={classes.modal}
@@ -233,7 +254,7 @@ class AllEvents extends Component {
                             <MapBox event={this.state.currentEvent} />
                         </div>
                     </Fade>
-                </Modal> */}
+                </Modal>
 
                 <br />
                 <br />

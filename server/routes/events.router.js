@@ -13,7 +13,10 @@ const sgMail = require('@sendgrid/mail');
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in router get');
-    const sqlText = `SELECT *, event_date at time zone 'cst' as event_date_zoned FROM event`;
+    const sqlText = `SELECT "event".*, count(dancer_events.dancer_id) as current_dancer_count FROM "event" 
+                        LEFT outer JOIN "dancer_events" ON "event".id = "dancer_events".event_id 
+                        group by dancer_events.event_id, "event".id  
+                        ORDER BY created_date DESC;`;
     pool
         .query(sqlText)
         .then((result) => {
@@ -148,7 +151,7 @@ router.get('/recent', rejectUnauthenticated, (req, res) => {
 
 
 
-//Join event
+//Join event if a user is interested to join an event
 router.post('/join', rejectUnauthenticated, (req, res) => {
     let query = `INSERT INTO dancer_events ("dancer_id", "event_id") VALUES ($1, $2);`;
     
@@ -161,7 +164,6 @@ router.post('/join', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     })
 });
-
 
 //get event list of one user
 router.get('/myevent', rejectUnauthenticated, (req, res) => {

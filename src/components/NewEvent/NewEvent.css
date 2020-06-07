@@ -13,9 +13,10 @@
     text-align: center;
 }
 
-.float-right {
+.new-event-button {
     float: right;
     margin-right:50px;
+    margin-top:90px;
 }
 
 .clear-both {

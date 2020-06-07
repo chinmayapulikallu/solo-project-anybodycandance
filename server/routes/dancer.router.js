@@ -59,7 +59,19 @@ router.delete('/:id', rejectUnauthorized, (req, res) => {
 });
 });
 
-
+//remove event if a user is not interested in an event
+router.put('/unjoin', (req, res) => {
+    let dancer_events_sql = `DELETE FROM dancer_events
+                            where "dancer_id" = $1 and "event_id" = $2;`
+    let values = [req.body.user_id, req.body.event_id]
+    console.log(values)
+    pool.query(dancer_events_sql, values).then((result) => {
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log(error)
+        res.sendStatus(500);
+    })
+});
 
 
 

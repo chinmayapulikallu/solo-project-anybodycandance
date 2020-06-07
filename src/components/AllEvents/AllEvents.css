@@ -1,9 +1,9 @@
 .event-title {
     text-align: center;
-    margin: 50px;
-    padding: 20px;
-    font-size: 50px;
-    font-family: "Times New Roman", Times, serif;
+    color: #A7412B;
+    margin: 2%;
+    padding: 1%;
+    font-size: 30px;
 }
 
 .event-image {
@@ -14,4 +14,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 50px;
+}
+
+.float-right {
+    float: right;
+    margin-right:30px;
+    margin-left: 30px;
+}
+
+.row-highlight {
+    background-color: #A7412B !important;
 }

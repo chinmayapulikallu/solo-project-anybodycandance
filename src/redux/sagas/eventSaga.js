@@ -10,15 +10,16 @@ function* eventSaga() {
     yield takeLatest('UPDATE_EVENT', updateEvent);
     yield takeLatest('GET_MY_EVENT', fetchMyEvent);
     yield takeLatest('GET_COORDINATES', fetchCoordinates);
-
+    yield takeLatest('UNJOIN_EVENT', unjoinEvent);
 }
+
 
 
 function* fetchCoordinates(action) {
     //move to function input event return endpoint
     //const url = buildEndpoint(event)
     const event = action.payload
-    const fullAddress = event.street+ " " + event.city+ " " + event.state+ " " + event.Zip
+    const fullAddress = event.street+ " " + event.city+ " " + event.state+ " " + event.zip
     const endpoint = "https://api.mapbox.com/geocoding/v5/mapbox.places/" 
                         + encodeURI(fullAddress)
                         + ".json?access_token="
@@ -114,12 +115,23 @@ function * joinEvent(action) {
     try {
         yield axios.post('/api/event/join', action.payload);
         yield put({ type: 'GET_NEW_EVENT' })
-}
-catch (err) {
-        console.log(err)
-}
+    }
+        catch (err) {
+            console.log(err)
+    }
 }
 
+//dancer can remove an event if not interested
+function * unjoinEvent(action) {
+    console.log("in unjoin event :: ", action.payload)
+    try {
+        yield axios.put('/api/dancer/unjoin', action.payload);
+        yield put({ type: 'GET_MY_EVENT' })
+    }
+    catch (err) {
+            console.log(err)
+    }
+}
 
 //deletes an event from the database
 function* deleteEvent(action) {

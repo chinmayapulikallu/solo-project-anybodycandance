@@ -11,7 +11,17 @@
 .my-title {
     text-align: center;
     color: #A7412B;
-    margin: 3%;
+    margin: 1.5%;
     padding: 2%;
     font-size: 30px;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.my-event-button {
+    float: right;
+    margin-right:50px;
+    margin-top:140px;
 }
