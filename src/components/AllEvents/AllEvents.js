@@ -250,7 +250,17 @@ class AllEvents extends Component {
                     <Fade in={this.state.openValue}>
                         <div className={classes.modalPaper}>
                             <h3>{this.state.currentEvent.event_name}</h3>
+                            <h4>Event Details:</h4>
                             <p>{this.state.currentEvent.event_description}</p>
+                            <h4>Dancers:</h4>
+                            <ul>
+                                {
+                                    this.state.currentEvent.event_dancers && this.state.currentEvent.event_dancers.map((dancer, index) =>
+                                        dancer && 
+                                        <li key={index}>{dancer}</li>)
+                                }
+                            </ul>
+
                             <MapBox event={this.state.currentEvent} />
                         </div>
                     </Fade>

@@ -13,8 +13,10 @@ const sgMail = require('@sendgrid/mail');
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in router get');
-    const sqlText = `SELECT "event".*, count(dancer_events.dancer_id) as current_dancer_count FROM "event" 
+    const sqlText = `SELECT "event".*, count(dancer_events.dancer_id) as current_dancer_count,
+                        array_agg(dancer.first_name) as event_dancers FROM "event" 
                         LEFT outer JOIN "dancer_events" ON "event".id = "dancer_events".event_id 
+                        LEFT outer JOIN dancer ON dancer_events.dancer_id = dancer.id
                         group by dancer_events.event_id, "event".id  
                         ORDER BY created_date DESC;`;
     pool

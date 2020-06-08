@@ -229,6 +229,7 @@ class NewEvent extends Component {
                     <Fade in={this.state.openValue}>
                         <div className={classes.modalPaper}>
                             <h3>{this.state.currentEvent.event_name}</h3>
+                            <h4>Event Details:</h4>
                             <p>{this.state.currentEvent.event_description}</p>
                             <MapBox event={this.state.currentEvent} />
                         </div>
