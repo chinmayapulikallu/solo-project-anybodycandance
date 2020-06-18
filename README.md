@@ -13,6 +13,31 @@ To see the fully functional site, please visit: DEPLOYED VERSION OF APP
 
 ## Screen Shot
 
+- Login Page:
+
+![Login](Wire-frames/login_page.png)
+
+- Admin Home Page:
+
+![Admin](Wire-frames/admin_home.png)
+
+- Create a new event :
+
+![Create Event](Wire-frames/create_event.png)
+
+- Dancers Page:
+
+![Dancers](Wire-frames/Dancers.png)
+
+- User Home Page:
+
+![User Home Page](Wire-frames/user_homepage.png)
+
+- User Events:
+
+![User Events](Wire-frames/my_events.png)
+
+
 ## Prerequisites
 
 - React
