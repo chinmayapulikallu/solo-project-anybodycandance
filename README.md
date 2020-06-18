@@ -19,23 +19,23 @@ To see the fully functional site, please visit: DEPLOYED VERSION OF APP
 
 - Admin Home Page:
 
-![Admin](Wire-frames/admin_home.png)
+![Admin](images/admin_home.png)
 
 - Create a new event :
 
-![Create Event](Wire-frames/create_event.png)
+![Create Event](images/create_event.png)
 
 - Dancers Page:
 
-![Dancers](Wire-frames/Dancers.png)
+![Dancers](images/dancers.png)
 
 - User Home Page:
 
-![User Home Page](Wire-frames/user_homepage.png)
+![User Home Page](images/user_homepage.png)
 
 - User Events:
 
-![User Events](Wire-frames/my_events.png)
+![User Events](images/my_events.png)
 
 
 ## Prerequisites
