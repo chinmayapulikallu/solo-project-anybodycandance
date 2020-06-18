@@ -35,7 +35,7 @@ To see the fully functional site, please visit: DEPLOYED VERSION OF APP
 
 - User Events:
 
-![User Events](wireframesmy_events.png)
+![User Events](wireframes/my_events.png)
 
 
 ## Prerequisites
